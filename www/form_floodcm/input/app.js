@@ -11,7 +11,7 @@ let map = L.map('map', {
 
 let marker, gps;
 
-const url = "http://localhost:3600";
+const url = "https://engrids.soc.cmu.ac.th/p3600";
 
 function loadMap() {
     var mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -37,8 +37,8 @@ function loadMap() {
         // CQL_FILTER: 'pro_code=20 OR pro_code=21 OR pro_code=24'
     });
     var baseMap = {
-        "Mapbox": mapbox.addTo(map),
-        "google Hybrid": ghyb
+        "Mapbox": mapbox,
+        "google Hybrid": ghyb.addTo(map)
     }
     var overlayMap = {
         // "ขอบเขตจังหวัด": pro.addTo(map),
@@ -136,12 +136,35 @@ let postData = async () => {
         }
     }
     console.log(datObj);
-    await axios.post(url + "/api/insertdata", datObj).then(() => console.log("ok"));
+    await axios.post(url + "/api/insertdata", datObj).then(() => {
+        $('#Modalconfirm').modal('show')
+    });
 }
-
-
 
 $(document).ready(() => {
     loadMap();
     // getData();
 });
+
+$("#help1").on("click", function () {
+    var n = $("#help1").val()
+    // console.log(a)
+    if (n == "ต้องการ") {
+        $("#detailhelp1").show();
+    } else {
+        (n == "")
+        $("#detailhelp1").hide();
+    }
+})
+$("#help2").on("click", function () {
+    var n = $("#help2").val()
+    // console.log(a)
+    if (n == "ไม่ต้องการ") {
+        $("#detailhelp1").hide();
+    } else {
+        (n == "")
+        $("#detailhelp1").hide();
+    }
+})
+
+$("#detailhelp1").hide()

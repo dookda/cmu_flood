@@ -10,8 +10,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="./../assets/img/favicon.png" rel="icon">
-    <link href="./../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="./../assets/img/logo-enweb.png" rel="icon">
+    <link href="./../assets/img/logo-enweb.png" rel="apple-touch-icon">
     <!-- start dooklink -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -83,7 +83,8 @@
                                 <div class="card-body">
                                     <!-- <form class="mt-3 mb-3" id="addform"> -->
                                     <p class="mb-0">กรุณาเพิ่มตำแหน่ง โดยกดที่เครื่องหมาย <i
-                                            class="bi bi-cursor-fill"></i> เพื่อไปยังตำแหน่งของท่าน และกดปักหมุดแผนที่
+                                            class="bi bi-cursor-fill"></i> เพื่อไปยังตำแหน่งของท่าน
+                                        และกดบนแผนที่เพื่อปักหมุดตำแหน่ง
                                     </p>
                                     <br>
                                     <div id="map"></div>
@@ -121,7 +122,7 @@
                                         <label for="patient">สถานะ:</label><br>
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" id="status1" name="status"
-                                                value="น้ำท่วมแล้ว" checked>น้ำท่วมแล้ว
+                                                value="น้ำท่วมแล้ว">น้ำท่วมแล้ว
                                             <label class="form-check-label" for=""></label>
                                         </div>
                                         <div class="form-check">
@@ -135,7 +136,7 @@
                                         <label for="patient">การสัญจร:</label><br>
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" id="travel1" name="travel"
-                                                value="รถเล็กสัญจรผ่านได้" checked>รถเล็กสัญจรผ่านได้
+                                                value="รถเล็กสัญจรผ่านได้">รถเล็กสัญจรผ่านได้
                                             <label class="form-check-label" for=""></label>
                                         </div>
                                         <div class="form-check">
@@ -148,7 +149,7 @@
                                         <label for="patient">ต้องการความช่วยเหลือ:</label><br>
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" id="help1" name="help"
-                                                value="ต้องการ" checked>ต้องการ
+                                                value="ต้องการ">ต้องการ
                                             <label class="form-check-label" for=""></label>
                                         </div>
                                         <div class="form-check">
@@ -157,12 +158,23 @@
                                             <label class="form-check-label" for=""></label>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="patient">ขอความช่วยเหลืออย่างไร:</label><br>
-                                        <input type="text" class="form-control" id="help_text">
+                                    <div class="col" id="detailhelp1">
+                                        <div class="form-group">
+                                            <label for="patient">ขอความช่วยเหลืออย่างไร
+                                                (กรุณาให้ข้อมูลเพิ่มเติมและเบอร์โทรศัพท์ในการติดต่อ):</label><br>
+                                            <input type="text" class="form-control" id="help_text">
+                                            <br>
+                                            <p> ทั้งนี้ สามารถติดต่อขอความช่วยเหลือเบื้องต้นได้จาก 081 8177225, 096
+                                                1535665, 061
+                                                2744567
+                                                และ
+                                                053 140380
+                                                <br> (อ้างอิง: เพจ facebook เชียงใหม่นิวส์ Chiang Mai News
+                                                ข่าวเชียงใหม่)
+                                            </p>
+                                        </div>
                                     </div>
 
-                                    <p></p>
                                     <div class="form-group">
                                         <label for="img">อัพโหลดรูปภาพ</label>
                                         <input type="file" class="form-control-file" id="imgfile" accept="image/*">

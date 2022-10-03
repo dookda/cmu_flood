@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>สถานการณ์น้ำท่วมจังหวัดเชียงใหม่</title>
+    <title>ภัยพิบัติทางธรรมชาติ</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="./../assets/img/logo-enweb.png" rel="icon">
-    <link href="./../assets/img/logo-enweb.png" rel="apple-touch-icon">
+    <link href="./../assets/img/favicon.png" rel="icon">
+    <link href="./../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
     <!-- start dooklink -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -57,8 +57,45 @@
 
 <body>
 
+    <!-- ======= Mobile nav toggle button ======= -->
+    <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
+
     <!-- ======= Header ======= -->
     <header id="header" class="d-flex flex-column justify-content-center">
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="./../../main_eac/index.html"><i class="fas fa-home"></i>
+                        <span>หน้าหลัก</span></a></li>
+                <li><a href="./../../form_demo/dashboard/index.html"><i class="fas fa-bacon"></i>
+                        <span>ความมั่นทางอาหาร</span></a>
+                </li>
+                <li><a href="./../../db_water/index.html"><i class="fas fa-chart-line"></i>
+                        <span>รายงานข้อมูลน้ำผิวดิน</span></a></li>
+                <li><a href="./../../form_organizeV2/report/index.html"><i class="fas fa-users-cog"></i>
+                        <span>กลุ่มเครือข่าย/องค์กร</span></a></li>
+                <!-- <li><a href="#map_eac"><i class="bx bx-layer"></i> <span>ระบบสารสนเทศภูมิศาสตร์เพื่อชุมชน</span></a> -->
+                <li><a href="./../../dashboard_wms/report/index.html"><i class="fas fa-layer-group"></i>
+                        <span>แผนที่ภาพรวม</span></a></li>
+                </li>
+                <li><a href="./../../form_travel/dashboard/index.html"><i class="fas fa-suitcase"></i>
+                        <span>ท่องเที่ยวชุมชน</span></a></li>
+                </li>
+                <li><a href="./../../form_notify/dashboard/index.html"><i class="fas fa-bullhorn"></i>
+                        <span>แจ้งปัญหาสิ่งแวดล้อม</span></a></li>
+                </li>
+                <li><a href="./../../form_learning/dashboard/index.html"><i class="fas fa-chalkboard-teacher"></i>
+                        <span>การเรียนรู้บนฐานชุมชน</span></a></li>
+                </li>
+                <li><a href="./../../main_eac/index.html"> <i class="fas fa-tree"></i>
+                        <span>ทรัพยากรธรรมชาติและสิ่งแวดล้อม</span></a></li>
+                </li>
+                <li class="active"><a href="#reportenvi"><i class="fas fa-exclamation-circle"></i>
+                        <span>เฝ้าระวังปัญหาผลกระทบจากมลพิษสิ่งแวดล้อม</span></a></li>
+                </li>
+            </ul>
+        </nav><!-- .nav-menu -->
+
     </header><!-- End Header -->
 
     <main id="main">
@@ -68,156 +105,162 @@
         <section class="section-bg" id="reportenvi">
             <div class="container">
                 <div class="section-title">
-                    <h2>สถานการณ์น้ำท่วมจังหวัดเชียงใหม่</h2>
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-sm">
-                            <img src="./../assets/img/logoengrids .png" width="80px">
-                        </div>
-                        <div class="col-sm">
-                            <img src="./../assets/img/logogeo.png" width="80px">
-                        </div>
-                        <div class="col-sm">
-                            <img src="./../assets/img/cmu_logo.png" width="80px">
-                        </div>
-                    </div>
+                    <h2>ภัยพิบัติทางธรรมชาติ</h2>
+                    <!-- <p>
+                        ระบบรายงานการแจ้งปัญหาสิ่งแวดล้อม
+                        โดยการนำเข้าข้อมูลของเครือข่ายศูนย์ข้อมูลสารสนเทศชุมชนภาคตะวันออก (สชอ.) <br>
+                        เพื่อช่วยจัดการปัญหาสิ่งแวดล้อมที่เกิดขึ้นในพื้นที่
+                    </p> -->
                 </div>
             </div>
-
-            </div>
             <div class="card p-4 d-flex flex-column">
-                <div class="col-sm-12">
-                    <div class="p-3 mt-2">
-                        <a type="button" class="btn btn-success" href="./../input/index.html"><i
-                                class="fas fa-plus-square"></i>&nbsp; เพิ่มข้อมูล</a>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="sel1">จังหวัด:</label>
+                            <select class="form-control" id="pro">
+                                <option value="TH">ทุกจังหวัด</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="sel1">อำเภอ:</label>
+                            <select class="form-control" id="amp">
+                                <option value="amp">ทุกอำเภอ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="sel1">ตำบล:</label>
+                            <select class="form-control" id="tam">
+                                <option value="tam">ทุกตำบล</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="row mt-5 mb-2">
-                    <div class="col-sm-6">
+                    <div class="col-sm-2">
                         <div class="card-board p-2 text-center d-flex align-items-center w-100">
                             <br>
                             <div class="container-fluid" style="text-align: center;">
-                                <img src="./../assets/img/icon-flood.png" width="60px">
+                                <img src="./marker/naturdis.png" width="60px">
                             </div>
                             <!-- <i class="bi bi-layers-half" style="font-size: 42px; color: #0563bb;"></i> -->
-                            <h6 style="font-weight: bold;font-size: 18px;">ตำแหน่งที่ได้รับผลกระทบทั้งหมด<span
+                            <h6 style="font-weight: bold;font-size: 18px;">จำนวนภัยพิบัติทางธรรมชาติ<span
                                     id="num_list_name"></span></h6>
-                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="numall"></span>
+                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="num_list"></span>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-2">
                         <div class="card-board p-2 text-center d-flex align-items-center w-100">
                             <br>
                             <div class="container-fluid" style="text-align: center;">
-                                <img src="./../assets/img/icon-flood.png" width="60px">
+                                <img src="./marker/storm.png" width="60px">
                             </div>
-                            <!-- <i class="bi bi-layers-half" style="font-size: 42px; color: #0563bb;"></i> -->
-                            <h6 style="font-weight: bold;font-size: 18px;">
-                                ตำแหน่งที่ต้องการความช่วยเหลือ<span id="num_list_name"></span></h6>
-                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="numhelp"></span>
-                        </div>
-                    </div>
-                    <!-- <div class="col-sm-3">
-                        <div class="card-board p-2 text-center d-flex align-items-center w-100">
-                            <br>
-                            <div class="container-fluid" style="text-align: center;">
-                                <img src="./../assets/img/icon-flood.png" width="60px">
-                            </div>
-                            
-                            <h6 style="font-weight: bold;font-size: 18px;">จำนวนตำแหน่งที่ได้รับผลกระทบทั้งหมด<span
-                                    id="num_list_name"></span></h6>
-                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="numall"></span>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="card-board p-2 text-center d-flex align-items-center w-100">
-                            <br>
-                            <div class="container-fluid" style="text-align: center;">
-                                <img src="./../assets/img/icon-water.png" width="60px">
-                            </div>
-                        
-                            <h6 style="font-weight: bold;font-size: 18px;">พื้นที่น้ำท่วมลำดับที่ 1</h6>
+                            <!-- <i class="bi bi-pie-chart-fill" style="font-size: 42px; color: #0563bb;"></i> -->
+                            <h6 style="font-weight: bold;font-size: 18px;">พายุฝนฟ้าคะนอง</h6>
                             <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="storm"></span>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <div class="card-board p-2 text-center d-flex align-items-center w-100">
                             <br>
                             <div class="container-fluid" style="text-align: center;">
-                                <img src="./../assets/img/icon-water.png" width="60px">
+                                <img src="./marker/seawave.png" width="60px">
                             </div>
-                           
-                            <h6 style="font-weight: bold;font-size: 18px;">พื้นที่น้ำท่วมลำดับที่ 2</h6>
+                            <!-- <i class="bi bi-geo-fill" style="font-size: 42px; color: #0563bb;"></i> -->
+                            <h6 style="font-weight: bold;font-size: 18px;">คลื่นพายุซัดฝั่ง</h6>
                             <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="seawaves"></span>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <div class="card-board p-2 text-center d-flex align-items-center w-100">
                             <br>
                             <div class="container-fluid" style="text-align: center;">
-                                <img src="./../assets/img/icon-water.png" width="60px">
+                                <img src="./marker/flood.png" width="60px">
                             </div>
-                           
-                            <h6 style="font-weight: bold;font-size: 18px;">พื้นที่น้ำท่วมลำดับที่ 3</h6>
-                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="seawaves"></span>
+                            <!-- <i class="bi bi-geo-fill" style="font-size: 42px; color: #0563bb;"></i> -->
+                            <h6 style="font-weight: bold;font-size: 18px;">น้ำท่วม</h6>
+                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="flood"></span>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <div class="card-board p-2 text-center d-flex align-items-center w-100">
                             <br>
                             <div class="container-fluid" style="text-align: center;">
-                                <img src="./../assets/img/icon-water.png" width="60px">
+                                <img src="./marker/drought.png" width="60px">
                             </div>
-                            
-                            <h6 style="font-weight: bold;font-size: 18px;">พื้นที่น้ำท่วมลำดับที่ 4</h6>
-                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="seawaves"></span>
+                            <!-- <i class="bi bi-geo-fill" style="font-size: 42px; color: #0563bb;"></i> -->
+                            <h6 style="font-weight: bold;font-size: 18px;">ภัยแล้ง</h6>
+                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="drought"></span>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <div class="card-board p-2 text-center d-flex align-items-center w-100">
                             <br>
                             <div class="container-fluid" style="text-align: center;">
-                                <img src="./../assets/img/icon-water.png" width="60px">
+                                <img src="./marker/other.png" width="60px">
                             </div>
-                            
-                            <h6 style="font-weight: bold;font-size: 18px;">พื้นที่น้ำท่วมลำดับที่ 5</h6>
-                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="seawaves"></span>
+                            <!-- <i class="bi bi-cast" style="font-size: 42px; color: #0563bb;"></i> -->
+                            <h6 style="font-weight: bold;font-size: 18px;">ภัยพิบัติอื่นๆ
+                            </h6>
+                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="other"></span>
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="card-board p-2 text-center d-flex align-items-center w-100">
-                            <br>
-                            <div class="container-fluid" style="text-align: center;">
-                                <img src="./../assets/img/icon-water.png" width="60px">
-                            </div>
-                           
-                            <h6 style="font-weight: bold;font-size: 18px;">พื้นที่น้ำท่วมลำดับที่ 6</h6>
-                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="seawaves"></span>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="card-board p-2 text-center d-flex align-items-center w-100">
-                            <br>
-                            <div class="container-fluid" style="text-align: center;">
-                                <img src="./../assets/img/icon-water.png" width="60px">
-                            </div>
-                          
-                            <h6 style="font-weight: bold;font-size: 18px;">พื้นที่น้ำท่วมลำดับที่ 7</h6>
-                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="seawaves"></span>
-                        </div>
-                    </div> -->
                 </div>
 
                 <div class="row">
                     <div class="col-sm-12">
                         <br>
                         <h5 class="text-center mb-3" style="font-weight: bold;">
-                            ตำแหน่งที่ได้รับผลกระทบ</h5>
+                            ตำแหน่งที่เกิดภัยพิบัติทางธรรมชาติ</h5>
                         <div style="background-color: white;">
                             <div id="map"></div>
-
                         </div>
-                        <br>
-                        <P> <b>อ้างอิง:</b> ขอบเขตระดับพื้นที่เสี่ยงน้ำท่วม ศูนย์อุทกวิทยาชลประทานภาคเหนือตอนบน </P>
+                        <div class="d-flex justify-content-between align-items-center p-3" style="background-color: white; border-bottom-left-radius: 15px;
+                        border-bottom-right-radius: 15px;">
+                            <div class="row">
+                                <img src="./marker/icon-storm.png" width="40px" alt="พายุฝนฟ้าคะนอง">
+                                <p class="m-auto">พายุฝนฟ้าคะนอง <span id="T1_list">0</span> แห่ง</p>
+                                <img src="./marker/icon-seawave.png" width="40px" alt="คลื่นพายุซัดฝั่ง">
+                                <p class="m-auto">คลื่นพายุซัดฝั่ง <span id="T2_list">0</span> แห่ง</p>
+                                <img src="./marker/icon-flood.png" width="40px" alt="น้ำท่วม">
+                                <p class="m-auto">น้ำท่วม <span id="T3_list">0</span> แห่ง</p>
+                                <img src="./marker/icon-drought.png" width="40px" alt="ภัยแล้ง">
+                                <p class="m-auto">ภัยแล้ง <span id="T4_list">0</span> แห่ง</p>
+                                <img src="./marker/icon-other.png" width="40px" alt="อื่นๆ">
+                                <p class="m-auto">อื่นๆ <span id="T5_list">0</span> แห่ง</p>
+                            </div>
+                            <div class="row">
+                                <strong class="m-auto">ทั้งหมด <span id="T0_all">0</span> แห่ง</strong>
+                                &nbsp;&nbsp;&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="p-3 mt-2" id="cardtable">
+                            <a type="button" class="btn btn-success" href="./../input/index.html"><i
+                                    class="fas fa-plus-square"></i>&nbsp; เพิ่มข้อมูล</a>
+                            <hr>
+                            <table id="myTable" class="table table-striped table-bordered display nowrap"
+                                style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>ลำดับ</th>
+                                        <th>เรื่อง</th>
+                                        <th>รายละเอียด</th>
+                                        <th>สถานะ</th>
+                                        <th>จังหวัด</th>
+                                        <th>อำเภอ</th>
+                                        <th>ตำบล</th>
+                                        <th>ผู้ให้ข้อมูล</th>
+                                        <th>จัดการข้อมูล</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

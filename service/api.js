@@ -50,7 +50,7 @@ app.post("/api/insertdata", async (req, res) => {
 
 app.get("/api/getdata", (req, res) => {
     const { usrid } = req.body;
-    const sql = `SELECT * FROM cmu_flood`;
+    const sql = `SELECT * , st_asgeojson(geom) as geojson FROM cmu_flood`;
     db.query(sql).then(r => {
         res.status(200).json({
             data: r.rows
