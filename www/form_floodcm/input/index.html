@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>ภัยพิบัติทางธรรมชาติ</title>
+    <title>รายงานสถานการณ์น้ำท่วมจังหวัดเชียงใหม่</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -65,7 +65,7 @@
         <section class="section-bg" id="food">
             <div class="container">
                 <div class="section-title">
-                    <h2>ภัยพิบัติทางธรรมชาติ</h2>
+                    <h2>รายงานสถานการณ์น้ำท่วมจังหวัดเชียงใหม่</h2>
                     <!-- <p>
                         เป็นการนำเข้าข้อมูลการเรียนรู้บนฐานชุมชน
                         โดยการมีส่วนร่วมของเครือข่ายศูนย์ข้อมูลสารสนเทศชุมชนภาคตะวันออก (สชอ.) <br>
@@ -73,362 +73,118 @@
                     </p> -->
                 </div>
                 <div class="d-flex flex-column">
-                    <div class="form-group card p-4">
-                        <h5 class="mb-0">เพิ่มตำแหน่งที่เกิดภัยพิบัติทางธรรมชาติ</h5>
-                        <!-- <label style="font-size: 14px;">กรุณาเพิ่มตำแหน่ง โดยกดที่เครื่องหมาย <i
-                                class="bi bi-geo-alt-fill"></i> </label> -->
-                        <hr>
-                        <div id="map"></div><br>
-                        <div class="form-row d-flex align-items-end">
-                            <div class="col-md-3 form-group">
-                                <label>ค่าพิกัด Lat</label>
-                                <input type="text" name="lat" class="form-control" id="lat" placeholder="lat"
-                                    readonly />
 
-                            </div>
-                            <div class="col-md-3 form-group">
-                                <label>ค่าพิกัด Lng</label>
-                                <input type="text" class="form-control" name="lng" id="lng" placeholder="lng"
-                                    readonly />
-                            </div>
-                            <div class="col-md-3 form-group">
-                                <label>ความแม่นยำ (เมตร)</label>
-                                <input type="text" class="form-control" name="accuracy" id="accuracy"
-                                    placeholder="ความแม่นยำ" readonly />
-                            </div>
-                            <div class="col-md-3 ">
-                                <div class="form-group d-flex flex-row justify-content-around">
-                                    <button type="button" class="btn btn-secondary" onclick="markerlocate()">จับตำแหน่ง
-                                        gps</button>
-                                    <button type="button" class="btn btn-secondary"
-                                        onclick="stoplocate()">เก็บค่าพิกัด</button>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="sel1">เลขที่:</label>
-                                    <input type="text" class="form-control" id="no">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="sel1">หมู่ที่:</label>
-                                    <input type="text" class="form-control" id="moo">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="sel1">ชื่อหมู่บ้าน:</label>
-                                    <input type="text" class="form-control" id="vill">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="sel1">จังหวัด:</label>
-                                    <select class="form-control" id="pro">
-                                        <option value="TH">ทุกจังหวัด</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        *ระบุจังหวัด
+                    <div class="container mt-15">
+
+                        <div class="card" id="adddiv">
+                            <div class="form-group p-4">
+                                <h5 class="mb-0">เพิ่มตำแหน่งที่ได้รับผลกระทบ</h5>
+                                <hr>
+                                <div class="card-body">
+                                    <!-- <form class="mt-3 mb-3" id="addform"> -->
+                                    <p class="mb-0">กรุณาเพิ่มตำแหน่ง โดยกดที่เครื่องหมาย <i
+                                            class="bi bi-cursor-fill"></i> เพื่อไปยังตำแหน่งของท่าน และกดปักหมุดแผนที่
+                                    </p>
+                                    <br>
+                                    <div id="map"></div>
+                                    <br>
+                                    <!-- <div class="form-row d-flex align-items-end">
+                                        <div class="col-md-3 form-group">
+                                            <label>ค่าพิกัด Lat</label>
+                                            <input type="text" name="lat" class="form-control" id="lat"
+                                                placeholder="lat" readonly />
+
+                                        </div>
+                                        <div class="col-md-3 form-group">
+                                            <label>ค่าพิกัด Lng</label>
+                                            <input type="text" class="form-control" name="lng" id="lng"
+                                                placeholder="lng" readonly />
+                                        </div>
+                                        <div class="col-md-3 form-group">
+                                            <label>ความแม่นยำ (เมตร)</label>
+                                            <input type="text" class="form-control" name="accuracy" id="accuracy"
+                                                placeholder="ความแม่นยำ" readonly />
+                                        </div>
+                                        <div class="col-md-3 ">
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-secondary"
+                                                    onclick="stoplocate()">ปักหมุดแผนที่</button>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="patient">ชื่อสถานที่ที่ได้รับผลกระทบ:</label><br>
+                                        <input type="text" class="form-control" id="pname">
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="sel1">อำเภอ:</label>
-                                    <select class="form-control" id="amp">
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        *ระบุอำเภอ
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="sel1">ตำบล:</label>
-                                    <select class="form-control" id="tam">
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        *ระบุตำบล
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group card p-4">
-                        <h5 class="mb-0">แจ้งปัญหา-ผลกระทบ</h5>
-                        <hr>
-                        <div class="form-group">
-                            <label>เรื่อง</label>
-                            <select class="form-control" id="noticenaturdis">
-                                <option value="">คลิกเลือกภัยพิบัติที่เกิดขึ้น</option>
-                                <option value="พายุฝนฟ้าคะนอง">พายุฝนฟ้าคะนอง</option>
-                                <option value="คลื่นพายุซัดฝั่ง">คลื่นพายุซัดฝั่ง</option>
-                                <option value="น้ำท่วม">น้ำท่วม</option>
-                                <option value="ภัยแล้ง">ภัยแล้ง</option>
-                                <option value="อื่นๆ">อื่นๆ</option>
-                            </select>
-                        </div>
-                        <div class="form-group" id="detail_storm">
-                            <label>รายละเอียด</label>
-                            <!-- <input type="text" class="form-control" id="noticedetail"> -->
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox"
-                                    value="เกิดพายุฝนฟ้าคะนอง ลมพัดแรง บ้านเรือนเสียหาย" id="destorm1">
-                                <label class="form-check-label" for="defaultCheck1">
-                                    เกิดพายุฝนฟ้าคะนอง ลมพัดแรง บ้านเรือนเสียหาย ต้นไม้ เสาไฟฟ้า เสาทีวี
-                                    ป้ายโฆษณาหักโค่น
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox"
-                                    value="ฝนตกหนักติดต่อหลายวันทำให้เกิดน้ำท่วมขัง รอการระบาย " id="destorm2">
-                                <label class="form-check-label" for="defaultCheck2">
-                                    ฝนตกหนักติดต่อหลายวันทำให้เกิดน้ำท่วมขัง รอการระบาย
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="ระบบสาธารณูปโภคได้รับความเสียหาย"
-                                    id="destorm3">
-                                <label class="form-check-label" for="defaultCheck3">
-                                    ระบบสาธารณูปโภคได้รับความเสียหาย เช่น โทรศัพท์ ไฟฟ้า ประปา เป็นต้น
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox"
-                                    value="พืชผลผลิตทางเกษตรได้รับความเสียหาย" id="destorm4">
-                                <label class="form-check-label" for="defaultCheck4">
-                                    พืชผลผลิตทางเกษตรได้รับความเสียหาย
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="อื่นๆ" id="">
-                                <label class="form-check-label" for="defaultCheck5">
-                                    อื่นๆ
-                                </label>
-                                <input type="text" class="form-control" id="destorm5" placeholder="โปรดระบุ">
-                            </div>
-                        </div>
-                        <div class="form-group" id="detail_seawaves">
-                            <label>รายละเอียด</label>
-                            <!-- <input type="text" class="form-control" id="noticedetail"> -->
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox"
-                                    value="ฝนตกหนักคลื่นซัดท่วมบ้านเรือน สิ่งก่อสร้างริมหาดเสียหาย" id="deseawaves1">
-                                <label class="form-check-label" for="defaultCheck1">
-                                    ฝนตกหนักคลื่นซัดท่วมบ้านเรือน สิ่งก่อสร้างริมหาดเสียหาย พังทลาย และถูกกวาดลงทะเล
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="เรือประมงพังเสียหาย "
-                                    id="deseawaves2">
-                                <label class="form-check-label" for="defaultCheck2">
-                                    เรือประมงพังเสียหาย
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="ระบบสาธารณูปโภคได้รับความเสียหาย"
-                                    id="deseawaves3">
-                                <label class="form-check-label" for="defaultCheck3">
-                                    ระบบสาธารณูปโภคได้รับความเสียหาย เช่น โทรศัพท์ ไฟฟ้า ประปา เป็นต้น
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox"
-                                    value="พืชผลผลิตทางเกษตรได้รับความเสียหาย" id="deseawaves4">
-                                <label class="form-check-label" for="defaultCheck4">
-                                    พืชผลผลิตทางเกษตรได้รับความเสียหาย
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="อื่นๆ" id="">
-                                <label class="form-check-label" for="defaultCheck5">
-                                    อื่นๆ
-                                </label>
-                                <input type="text" class="form-control" id="deseawaves5" placeholder="โปรดระบุ">
-                            </div>
-                        </div>
-                        <div class="form-group" id="detail_flood">
-                            <label>รายละเอียด</label>
-                            <!-- <input type="text" class="form-control" id="noticedetail"> -->
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox"
-                                    value="น้ำท่วมหนัก บ้านเรือนเสียหาย ข้าวของลอยไปตามน้ำ " id="deflood1">
-                                <label class="form-check-label" for="defaultCheck1">
-                                    น้ำท่วมหนัก บ้านเรือนเสียหาย ข้าวของลอยไปตามน้ำ
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="น้ำท่วมขังรอการระบาย"
-                                    id="deflood2">
-                                <label class="form-check-label" for="defaultCheck2">
-                                    น้ำท่วมขังรอการระบาย
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="ระบบสาธารณูปโภคได้รับความเสียหาย"
-                                    id="deflood3">
-                                <label class="form-check-label" for="defaultCheck3">
-                                    ระบบสาธารณูปโภคได้รับความเสียหาย เช่น โทรศัพท์ ไฟฟ้า ประปา เป็นต้น
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox"
-                                    value="พืชผลผลิตทางเกษตรได้รับความเสียหาย" id="deflood4">
-                                <label class="form-check-label" for="defaultCheck4">
-                                    พืชผลผลิตทางเกษตรได้รับความเสียหาย
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="อื่นๆ" id="">
-                                <label class="form-check-label" for="defaultCheck5">
-                                    อื่นๆ
-                                </label>
-                                <input type="text" class="form-control" id="deflood5" placeholder="โปรดระบุ">
-                            </div>
-                        </div>
-                        <div class="form-group" id="detail_drought">
-                            <label>รายละเอียด</label>
-                            <!-- <input type="text" class="form-control" id="noticedetail"> -->
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox"
-                                    value="ขาดแคลนการใช้น้ำ ปริมาณน้ำจืดไม่เพียงพอต่อการใช้" id="dedrought1">
-                                <label class="form-check-label" for="defaultCheck1">
-                                    ขาดแคลนการใช้น้ำ ปริมาณน้ำจืดไม่เพียงพอต่อการใช้
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox"
-                                    value="พืชผลขาดน้ำ ทำให้พืชผลไม่สมบูรณ์ ไม่เจริญเติบโต" id="dedrought2">
-                                <label class="form-check-label" for="defaultCheck2">
-                                    พืชผลขาดน้ำ ทำให้พืชผลไม่สมบูรณ์ ไม่เจริญเติบโต และ ไม่ให้ผลตามปกติ
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="อื่นๆ" id="">
-                                <label class="form-check-label" for="defaultCheck3">
-                                    อื่นๆ
-                                </label>
-                                <input type="text" class="form-control" id="dedrought3" placeholder="โปรดระบุ">
-                            </div>
-                        </div>
-                        <div class="form-group" id="detail_othernaturdis">
-                            <label>รายละเอียด</label>
-                            <!-- <input type="text" class="form-control" id="noticedetail"> -->
-                            <textarea class="form-control" rows="4" aria-label="With textarea"
-                                placeholder="โปรดระบุรายละเอียดอื่นๆ เพิ่มเติม" id="othernaturdis"></textarea>
-                        </div>
-                        <br>
-                        <form id="status">
-                            <div class="form-group">
-                                <div class="row">
-                                    <legend class="col-form-label col-sm-2 pt-0">สถานะ</legend>
-                                    <div class="col-sm-10">
+                                    <div class="form-group">
+                                        <label for="patient">สถานะ:</label><br>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="radioName"
-                                                value="ยังไม่ได้ดำเนินการแก้ไข" checked>
-                                            <label class="form-check-label" for="status1">
-                                                ยังไม่ได้ดำเนินการแก้ไข
-                                            </label>
+                                            <input type="radio" class="form-check-input" id="status1" name="status"
+                                                value="น้ำท่วมแล้ว" checked>น้ำท่วมแล้ว
+                                            <label class="form-check-label" for=""></label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="radioName"
-                                                value="กำลังดำเนินการแก้ไข">
-                                            <label class="form-check-label" for="status2">
-                                                กำลังดำเนินการแก้ไข
-                                            </label>
-                                        </div>
-                                        <div class="form-check disabled">
-                                            <input class="form-check-input" type="radio" name="radioName"
-                                                value="ดำเนินการแก้ไขเรียบร้อย">
-                                            <label class="form-check-label" for="status3">
-                                                ดำเนินการแก้ไขเรียบร้อย
-                                            </label>
+                                            <input type="radio" class="form-check-input" id="status2" name="status"
+                                                value="ยังไม่ท่วม">น้ำยังไม่ท่วม
+                                            <label class="form-check-label" for=""></label>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </form>
-                        <br>
-                        <div class="form-group">
-                            <label for="img"> <b>อัพโหลดรูปภาพ </b></label>
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="form-group text-center">
-                                        <span>รูปภาพที่ 1</span>
-                                        <input type="file" class="form-control-file" id="imgfile1">
-                                        <!-- <img src="" id="preview1" width="250px"> -->
-                                        <div class="image-area mt-4"><img id="preview1" width="250px" src="#" alt=""
-                                                class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+                                    <div class="form-group">
+                                        <label for="patient">การสัญจร:</label><br>
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="travel1" name="travel"
+                                                value="รถเล็กสัญจรผ่านได้" checked>รถเล็กสัญจรผ่านได้
+                                            <label class="form-check-label" for=""></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="travel2" name="travel"
+                                                value="รถเล็กสัญจรผ่านไม่ได้">รถเล็กสัญจรผ่านไม่ได้
+                                            <label class="form-check-label" for=""></label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group text-center">
-                                        <span>รูปภาพที่ 2</span>
-                                        <input type="file" class="form-control-file" id="imgfile2">
-                                        <div class="image-area mt-4"><img id="preview2" width="250px" src="#" alt=""
-                                                class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                                    <div class="form-group">
+                                        <label for="patient">ต้องการความช่วยเหลือ:</label><br>
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="help1" name="help"
+                                                value="ต้องการ" checked>ต้องการ
+                                            <label class="form-check-label" for=""></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="help2" name="help"
+                                                value="ไม่ต้องการ">ไม่ต้องการ
+                                            <label class="form-check-label" for=""></label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group text-center">
-                                        <span>รูปภาพที่ 3</span>
-                                        <input type="file" class="form-control-file" id="imgfile3">
-                                        <div class="image-area mt-4"><img id="preview3" width="250px" src="#" alt=""
-                                                class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                                    <div class="form-group">
+                                        <label for="patient">ขอความช่วยเหลืออย่างไร:</label><br>
+                                        <input type="text" class="form-control" id="help_text">
                                     </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group text-center">
-                                        <span>รูปภาพที่ 4</span>
-                                        <input type="file" class="form-control-file" id="imgfile4">
-                                        <div class="image-area mt-4"><img id="preview4" width="250px" src="#" alt=""
-                                                class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+                                    <p></p>
+                                    <div class="form-group">
+                                        <label for="img">อัพโหลดรูปภาพ</label>
+                                        <input type="file" class="form-control-file" id="imgfile" accept="image/*">
+                                        <p></p>
+                                        <img src="" id="preview" width="50%">
                                     </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group text-center">
-                                        <span>รูปภาพที่ 5</span>
-                                        <input type="file" class="form-control-file" id="imgfile5">
-                                        <div class="image-area mt-4"><img id="preview5" width="250px" src="#" alt=""
-                                                class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success" onclick="postData()"><i
+                                                class="bi bi-save"></i>&nbsp;ส่งข้อมูล</button>
+                                        <button type="button" class="btn btn-light"
+                                            onclick="location.href='./../dashboard/index.html';">หน้ารายงาน</button>
                                     </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group text-center">
-                                        <span>รูปภาพที่ 6</span>
-                                        <input type="file" class="form-control-file" id="imgfile6">
-                                        <div class="image-area mt-4"><img id="preview6" width="250px" src="#" alt=""
-                                                class="img-fluid rounded shadow-sm mx-auto d-block"></div>
-                                    </div>
+                                    <!-- </form> -->
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-sm">
-                                <label for="gwdate">วันที่บันทึกข้อมูล:</label>
-                                <input type="datetime-local" class="form-control" id="datetimes" required>
-                            </div>
-                            <div class="col-sm">
-                                <label for="record">ผู้ให้ข้อมูล:</label>
-                                <input type="text" class="form-control" id="record">
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
-            </div>
             <br>
-            <div class="d-flex justify-content-center flex-row">
-                <button class="btn btn-3bb mr-1" type="button" onclick="savedata()">บันทึกข้อมูล</button>
-                <button type="button" class="btn btn-light"
-                    onclick="location.href='./../dashboard/index.html';">หน้ารายงาน</button>
             </div>
             </div>
             </div>
