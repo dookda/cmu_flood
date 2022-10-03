@@ -1,0 +1,112 @@
+#leaflet, #map {
+    width: 100%;
+    height: 450px;
+    border-radius: 15px;
+  }
+.body{
+    background-color: #E8E8ED;
+}
+.card{
+  background-color: #F4FAFF;
+  border-radius: 15px;
+  box-shadow:0 24px 36px rgba(0, 0, 0, 0.11), 0 0px 46px rgba(0, 0, 0, 0.04);
+}
+.leaflet-control-layers-list {
+      margin-top: -50px;
+      margin-bottom: -50px;
+      height: fit-content;
+}
+.btn-3bb{
+  background-color: #0563bb; 
+  color: #FFFF; 
+  border: solid;
+  border-radius: 5px;
+}
+.btn-3bb:hover{
+  background-color: #FFFF; 
+  color: #0563bb; 
+  border-color:#0563bb ;
+  border: solid;
+  border-radius: 10px;
+}
+.circle-icon{
+  width: 30px ;
+  height: 30px;
+  max-width: 100%;
+  background-color: #0563bb;
+  /* background-color: azure; */
+  /* border: 5px solid ; */
+  border-radius: 50%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-type{
+  display: flex;
+  justify-content: center;
+  background-color: #F4FAFF;
+  border-radius: 15px;
+  box-shadow:0 24px 36px rgba(0, 0, 0, 0.11), 0 0px 46px rgba(0, 0, 0, 0.04);
+}
+.type{
+  border-color:#F4FAFF ;
+  box-shadow: 0 24px 36px rgba(244,250,255), 0 0px 46px rgba(244,250,255);
+}
+
+.type:hover{
+  color: #0563bb;
+  /* transform: scale(1.15, 1.15);
+  border: none; */
+  box-shadow:0 24px 36px rgba(0, 0, 0, 0.11), 0 0px 46px rgba(0, 0, 0, 0.04);
+}
+
+.border-none{
+  color: #636364;
+  border: none;
+}
+.btn:hover{
+  border-radius: 15px;
+}
+
+.BG02 {
+  background: #05BBB8 !important;
+  color: #FFFF;
+}
+.kanit-16{
+  font-family: "Kanit",sans-serif !important;
+  font-size: 16;
+}
+.filter-switch label {
+  cursor: pointer;
+}
+.filter-switch-item input:checked + label {
+  color: inherit;
+}
+.filter-switch-item input:not(:checked) + label {
+  --bg-opacity: 0;
+  box-shadow: none;
+}
+
+.image-area {
+  border: 2px dashed #AEB5B8;
+  padding: 1rem;
+  position: relative;
+}
+
+.image-area::before {
+  content: 'อัพโหลดรูปภาพ';
+  color: #AEB5B8;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.8rem;
+  z-index: 1;
+}
+.image-area img {
+  z-index: 2;
+  position: relative;
+}
