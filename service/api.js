@@ -22,20 +22,11 @@ app.post("/api/insertdata", async (req, res) => {
         }
 
         if (data.geom !== "") {
-            let json = {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": data.geom
-                },
-                "properties": {
-                    "name": "Dinagat Islands"
-                }
-            }
+
             let sql = `UPDATE cmu_flood
                         SET geom=ST_GeomfromText('POINT(${data.geom[0]} ${data.geom[1]} )',4326)
                         WHERE usrid='${usrid}';`
-            console.log(sql);
+
             await db.query(sql)
         }
     }
@@ -46,23 +37,23 @@ app.post("/api/insertdata", async (req, res) => {
 
 
 
-app.post("/api/getdata", (req, res) => {
+// app.post("/api/getdata", (req, res) => {
+//     const { usrid } = req.body;
+//     const sql = `SELECT * FROM cmu_flood`;
+//     db.query(sql).then(r => {
+//         res.status(200).json({
+//             data: r.rows
+//         })
+//     })
+// });
+
+
+app.get("/api/getdata", (req, res) => {
     const { usrid } = req.body;
     const sql = `SELECT * FROM cmu_flood`;
     db.query(sql).then(r => {
         res.status(200).json({
             data: r.rows
-        })
-    })
-});
-
-
-app.get("/api/getdata1", (req, res) => {
-    const { usrid } = req.body;
-    const sql = `SELECT * FROM cmu_flood`;
-    db.query(sql).then(r => {
-        res.status(200).json({
-            data: "r.rows"
         })
     })
 });
