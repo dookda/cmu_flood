@@ -255,23 +255,23 @@ let getmarker = (d) => {
                 // .addTo(map)
                 ms.addLayer(mm);
             }
-        } else if (latlng !== "0" && latlng !== null) {
-            console.log(latlng)
-            if (i.help == 'ต้องการ') {
-                mm = L.marker([i.lat, i.lng], { name: "marker", icon: MIcon_01 })
-                    .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
-                <h6><b>ความช่วยเหลือ :</b> ${i.help} <b>รายละเอียด</b>: ${i.help_text} <br> </h6>`)
-                ms.addLayer(mm);// 
-            } else if (i.help == 'ไม่ต้องการ') {
-                mm = L.marker([i.lat, i.lng], { name: "marker", icon: MIcon_02 })
-                    .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
-                <h6><b>ความช่วยเหลือ :</b> ${i.help} <b>รายละเอียด</b>: ${i.help_text} <br> </h6>`)
-            } else {
-                mm = L.marker([i.lat, i.lng], { name: "marker", icon: MIcon_03 })
-                    .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
-                <h6><b>ความช่วยเหลือ :</b> ${i.help} <b>รายละเอียด</b>: ${i.help_text} <br> </h6>`)
-                ms.addLayer(mm);// 
-            }
+            // } else if (i.lat !== "0" && i.lat !== null && i.lng !== "0" && i.lng !== null) {
+            //     console.log(i.lat, i.lng)
+            //     if (i.help == 'ต้องการ') {
+            //         mm = L.marker([i.lat, i.lng], { name: "marker", icon: MIcon_01 })
+            //             .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
+            //         <h6><b>ความช่วยเหลือ :</b> ${i.help} <b>รายละเอียด</b>: ${i.help_text} <br> </h6>`)
+            //         ms.addLayer(mm);// 
+            //     } else if (i.help == 'ไม่ต้องการ') {
+            //         mm = L.marker([i.lat, i.lng], { name: "marker", icon: MIcon_02 })
+            //             .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
+            //         <h6><b>ความช่วยเหลือ :</b> ${i.help} <b>รายละเอียด</b>: ${i.help_text} <br> </h6>`)
+            //     } else {
+            //         mm = L.marker([i.lat, i.lng], { name: "marker", icon: MIcon_03 })
+            //             .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
+            //         <h6><b>ความช่วยเหลือ :</b> ${i.help} <b>รายละเอียด</b>: ${i.help_text} <br> </h6>`)
+            //         ms.addLayer(mm);// 
+            //     }
         }
     });
     ms.addTo(map)
