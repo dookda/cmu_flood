@@ -1,11 +1,11 @@
 const url = "https://engrids.soc.cmu.ac.th/api";
 let latlng = {
-    lat: 13.3234652,
-    lng: 101.7580673
+    lat: 18.784033,
+    lng: 99.004762
 };
 let map = L.map("map", {
     center: latlng,
-    zoom: 8
+    zoom: 15
 });
 const mapbox = L.tileLayer(
     "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
@@ -26,39 +26,14 @@ const ghyb = L.tileLayer("https://{s}.google.com/vt/lyrs=y,m&x={x}&y={y}&z={z}",
     subdomains: ["mt0", "mt1", "mt2", "mt3"]
 });
 
-const tam = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/eac/wms?", {
-    layers: "eac:tam_eac",
-    format: "image/png",
-    transparent: true,
-    maxZoom: 18,
-    // minZoom: 14,
-    // CQL_FILTER: 'pro_code=20 OR pro_code=21 OR pro_code=24'
-});
-
-const amp = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/eac/wms?", {
-    layers: "eac:amp_eac",
-    format: "image/png",
-    transparent: true,
-    maxZoom: 14,
-    // minZoom: 10,
-    // CQL_FILTER: 'pro_code=20 OR pro_code=21 OR pro_code=24'
-});
-
-const pro = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/eac/wms?", {
-    layers: "eac:prov_eac",
-    format: "image/png",
-    transparent: true,
-    maxZoom: 10,
-    // CQL_FILTER: 'pro_code=20 OR pro_code=21 OR pro_code=24'
-});
 
 const baseMaps = {
-    "Mapbox": mapbox.addTo(map),
-    "Google Hybrid": ghyb
+    "Mapbox": mapbox,
+    "Google Hybrid": ghyb.addTo(map)
 };
 
 const overlayMaps = {
-    "ขอบเขตจังหวัด": pro.addTo(map),
+    "ขอบเขตจังหวัด": pro,
     "ขอบเขตอำเภอ": amp,
     "ขอบเขตตำบล": tam,
 };

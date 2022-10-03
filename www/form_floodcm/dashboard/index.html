@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>น้ำท่วมเชียงใหม่</title>
+    <title>สถานการณ์น้ำท่วมจังหวัดเชียงใหม่</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="./../assets/img/favicon.png" rel="icon">
-    <link href="./../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="./../assets/img/logo-enweb.png" rel="icon">
+    <link href="./../assets/img/logo-enweb.png" rel="apple-touch-icon">
     <!-- start dooklink -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -69,46 +69,109 @@
             <div class="container">
                 <div class="section-title">
                     <h2>สถานการณ์น้ำท่วมจังหวัดเชียงใหม่</h2>
-                    <!-- <p>
-                        ระบบรายงานการแจ้งปัญหาสิ่งแวดล้อม
-                        โดยการนำเข้าข้อมูลของเครือข่ายศูนย์ข้อมูลสารสนเทศชุมชนภาคตะวันออก (สชอ.) <br>
-                        เพื่อช่วยจัดการปัญหาสิ่งแวดล้อมที่เกิดขึ้นในพื้นที่
-                    </p> -->
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-sm">
+                            <img src="./../assets/img/logoengrids .png" width="80px">
+                        </div>
+                        <div class="col-sm">
+                            <img src="./../assets/img/logogeo.png" width="80px">
+                        </div>
+                        <div class="col-sm">
+                            <img src="./../assets/img/cmu_logo.png" width="80px">
+                        </div>
+                    </div>
                 </div>
+            </div>
+
             </div>
             <div class="card p-4 d-flex flex-column">
                 <div class="row mt-5 mb-2">
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="card-board p-2 text-center d-flex align-items-center w-100">
                             <br>
                             <div class="container-fluid" style="text-align: center;">
-                                <img src="./marker/naturdis.png" width="60px">
+                                <img src="./../assets/img/icon-flood.png" width="60px">
                             </div>
                             <!-- <i class="bi bi-layers-half" style="font-size: 42px; color: #0563bb;"></i> -->
-                            <h6 style="font-weight: bold;font-size: 18px;">จำนวนตำแหน่งน้ำท่วม<span
+                            <h6 style="font-weight: bold;font-size: 18px;">จำนวนตำแหน่งที่ได้รับผลกระทบทั้งหมด<span
                                     id="num_list_name"></span></h6>
                             <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="num_list"></span>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="card-board p-2 text-center d-flex align-items-center w-100">
                             <br>
                             <div class="container-fluid" style="text-align: center;">
-                                <img src="./marker/storm.png" width="60px">
+                                <img src="./../assets/img/icon-water.png" width="60px">
                             </div>
                             <!-- <i class="bi bi-pie-chart-fill" style="font-size: 42px; color: #0563bb;"></i> -->
-                            <h6 style="font-weight: bold;font-size: 18px;">พายุฝนฟ้าคะนอง</h6>
+                            <h6 style="font-weight: bold;font-size: 18px;">พื้นที่น้ำท่วมลำดับที่ 1</h6>
                             <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="storm"></span>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="card-board p-2 text-center d-flex align-items-center w-100">
                             <br>
                             <div class="container-fluid" style="text-align: center;">
-                                <img src="./marker/seawave.png" width="60px">
+                                <img src="./../assets/img/icon-water.png" width="60px">
                             </div>
                             <!-- <i class="bi bi-geo-fill" style="font-size: 42px; color: #0563bb;"></i> -->
-                            <h6 style="font-weight: bold;font-size: 18px;">คลื่นพายุซัดฝั่ง</h6>
+                            <h6 style="font-weight: bold;font-size: 18px;">พื้นที่น้ำท่วมลำดับที่ 2</h6>
+                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="seawaves"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card-board p-2 text-center d-flex align-items-center w-100">
+                            <br>
+                            <div class="container-fluid" style="text-align: center;">
+                                <img src="./../assets/img/icon-water.png" width="60px">
+                            </div>
+                            <!-- <i class="bi bi-geo-fill" style="font-size: 42px; color: #0563bb;"></i> -->
+                            <h6 style="font-weight: bold;font-size: 18px;">พื้นที่น้ำท่วมลำดับที่ 3</h6>
+                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="seawaves"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card-board p-2 text-center d-flex align-items-center w-100">
+                            <br>
+                            <div class="container-fluid" style="text-align: center;">
+                                <img src="./../assets/img/icon-water.png" width="60px">
+                            </div>
+                            <!-- <i class="bi bi-geo-fill" style="font-size: 42px; color: #0563bb;"></i> -->
+                            <h6 style="font-weight: bold;font-size: 18px;">พื้นที่น้ำท่วมลำดับที่ 4</h6>
+                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="seawaves"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card-board p-2 text-center d-flex align-items-center w-100">
+                            <br>
+                            <div class="container-fluid" style="text-align: center;">
+                                <img src="./../assets/img/icon-water.png" width="60px">
+                            </div>
+                            <!-- <i class="bi bi-geo-fill" style="font-size: 42px; color: #0563bb;"></i> -->
+                            <h6 style="font-weight: bold;font-size: 18px;">พื้นที่น้ำท่วมลำดับที่ 5</h6>
+                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="seawaves"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card-board p-2 text-center d-flex align-items-center w-100">
+                            <br>
+                            <div class="container-fluid" style="text-align: center;">
+                                <img src="./../assets/img/icon-water.png" width="60px">
+                            </div>
+                            <!-- <i class="bi bi-geo-fill" style="font-size: 42px; color: #0563bb;"></i> -->
+                            <h6 style="font-weight: bold;font-size: 18px;">พื้นที่น้ำท่วมลำดับที่ 6</h6>
+                            <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="seawaves"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card-board p-2 text-center d-flex align-items-center w-100">
+                            <br>
+                            <div class="container-fluid" style="text-align: center;">
+                                <img src="./../assets/img/icon-water.png" width="60px">
+                            </div>
+                            <!-- <i class="bi bi-geo-fill" style="font-size: 42px; color: #0563bb;"></i> -->
+                            <h6 style="font-weight: bold;font-size: 18px;">พื้นที่น้ำท่วมลำดับที่ 7</h6>
                             <span style="font-size: 34px;font-weight: bold; color: #0563bb;" id="seawaves"></span>
                         </div>
                     </div>
