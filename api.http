@@ -1,0 +1,36 @@
+
+# POST http://localhost:3200/api/genqr/ HTTP/1.1
+# content-type: application/json
+
+# {
+#     "usrid": "usrid"
+# }
+
+
+###
+
+ POST https://rti2dss.com/p3200/api/score330login/ HTTP/1.1
+ Content-Type: application/json
+
+{    
+      "std_id": "630410001",
+      "pass":"630410001"
+ }
+
+
+###
+# GET https://sheets.googleapis.com/v4/spreadsheets/1H8XAEH8ceZGdmBT1jWAv2TA1P40IInD3BqO3OVaqvgE/values/Form Responses 1?alt=json&key=AIzaSyDBvLZMFRD_cQB-O9tvof3EpF7_KQwMK0w
+//https://docs.google.com/forms/d/e/1FAIpQLSeIG5QqRYGdQ_MMYtfRjglSaj19uJw18MU3_X_ptoi0OmCzbg/viewform?usp=pp_url&entry.28548348=sakda
+
+POST http://localhost:3200/api/checkquiz
+
+###
+
+GET http://localhost:8080/geoserver/rest/layers.json
+Content-Type: application/json
+Authorization: Basic admin:geoserver
+
+###
+GET http://localhost:8080/geoserver/rest/layers/states.json
+Content-Type: application/json
+Authorization: Basic admin:geoserver
