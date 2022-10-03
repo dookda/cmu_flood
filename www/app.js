@@ -10,7 +10,7 @@ let map = L.map('map', {
 
 let marker, gps;
 
-const url = "http://localhost:3600";
+const url = "https://engrids.soc.cmu.ac.th/p3600";
 
 function loadMap() {
     var mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
