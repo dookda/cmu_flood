@@ -37,18 +37,18 @@ app.post("/api/insertdata", async (req, res) => {
 
 
 
-app.post("/api/getdata", (req, res) => {
-    const { usrid } = req.body;
-    const sql = `SELECT * FROM cmu_flood`;
-    db.query(sql).then(r => {
-        res.status(200).json({
-            data: r.rows
-        })
-    })
-});
+// app.post("/api/getdata", (req, res) => {
+//     const { usrid } = req.body;
+//     const sql = `SELECT * FROM cmu_flood`;
+//     db.query(sql).then(r => {
+//         res.status(200).json({
+//             data: r.rows
+//         })
+//     })
+// });
 
 
-app.get("/api/getdata1", (req, res) => {
+app.get("/api/getdata", (req, res) => {
     const { usrid } = req.body;
     const sql = `SELECT * FROM cmu_flood`;
     db.query(sql).then(r => {
