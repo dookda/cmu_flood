@@ -44,7 +44,7 @@ const baseMaps = {
 };
 
 const overlayMaps = {
-    "ขอบเขตระดับพื้นที่เสี่ยงน้ำท่วม": Zoneflood,
+    "ขอบเขตระดับพื้นที่เสี่ยงน้ำท่วม": Zoneflood.addTo(map),
     "เรดาห์ฝน": radar.addTo(map)
 };
 
@@ -93,12 +93,12 @@ let getmarker = (d) => {
         iconAnchor: [30, 50],
         popupAnchor: [0, -10]
     });
-    // var MIcon_03 = L.icon({
-    //     iconUrl: './marker/icon-other.png',
-    //     iconSize: [50, 50],
-    //     iconAnchor: [30, 50],
-    //     popupAnchor: [0, -10]
-    // });
+    var MIcon_03 = L.icon({
+        iconUrl: './marker/icon-other.png',
+        iconSize: [50, 50],
+        iconAnchor: [30, 50],
+        popupAnchor: [0, -10]
+    });
 
     ms = L.layerGroup()
     d.map(i => {
@@ -131,18 +131,17 @@ let getmarker = (d) => {
                 <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> <h6> <b>รายละเอียด</b>: ${helptext} <br> </h6> <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
                 // .addTo(map)
                 ms.addLayer(mm);
+            } else {
+                mm = L.geoJson(json, {
+                    pointToLayer: function (feature, latlng) {
+                        return L.marker(latlng, { name: "marker", icon: MIcon_03 });
+                    }
+                })
+                    .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
+                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> <h6> <b>รายละเอียด</b>: ${helptext} <br> </h6> <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
+                // .addTo(map)
+                ms.addLayer(mm);
             }
-            // } else {
-            //     mm = L.geoJson(json, {
-            //         pointToLayer: function (feature, latlng) {
-            //             return L.marker(latlng, { name: "marker", icon: MIcon_03 });
-            //         }
-            //     })
-            //         .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
-            //     <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> <h6> <b>รายละเอียด</b>: ${helptext} <br> </h6> <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
-            //     // .addTo(map)
-            //     ms.addLayer(mm);
-            // }
         }
     });
     ms.addTo(map)
@@ -280,6 +279,11 @@ function showLegend() {
         div.innerHTML += `<i style="background: #fff25f; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 7</span><br>`;
         div.innerHTML += `<img src= \"./marker/icon-flood1.png"\" width=\"400px\" height=\"150px\"></i>ตำแหน่งที่ต้องการความช่วยเหลือ</label></div><br>`;
         div.innerHTML += `<img src= \"./marker/icon-flood2.png"\" width=\"400px\" height=\"150px\"></i>ตำแหน่งที่ยังไม่ต้องการความช่วยเหลือ</label></div><br>`;
+        div.innerHTML += `<i style="background: #DB7E45; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 7</span><br>`;
+        div.innerHTML += `<i style="background: #FFD864; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 7</span><br>`;
+        div.innerHTML += `<i style="background: #05CD53; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 7</span><br>`;
+        div.innerHTML += `<i style="background: #439FFF; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 7</span><br>`;
+        div.innerHTML += `<i style="background: #FF4646; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 7</span><br>`;
         return div;
     };
     legend.addTo(map);
