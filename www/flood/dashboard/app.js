@@ -82,13 +82,13 @@ let getmarker = (d) => {
 
     var MIcon_01 = L.icon({
         iconUrl: './marker/icon-flood1.png',
-        iconSize: [50, 50],
+        iconSize: [55, 55],
         iconAnchor: [30, 50],
         popupAnchor: [0, -10]
     });
     var MIcon_02 = L.icon({
         iconUrl: './marker/icon-flood2.png',
-        iconSize: [60, 60],
+        iconSize: [55, 55],
         iconAnchor: [30, 50],
         popupAnchor: [0, -10]
     });
@@ -104,7 +104,7 @@ let getmarker = (d) => {
         if (i.help_text !== null) {
             helptext = i.help_text
         } else {
-            helptext = "ไม่ระบุ"
+            helptext = "-"
         }
         if (i.geojson) {
             let json = JSON.parse(i.geojson);
@@ -341,6 +341,12 @@ function showLegend() {
         div.innerHTML += `<i style="background: #fff25f; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 7</span><br>`;
         div.innerHTML += `<img src= \"./marker/icon-flood1.png"\" width=\"400px\" height=\"150px\"></i>ตำแหน่งที่ต้องการความช่วยเหลือ</label></div><br>`;
         div.innerHTML += `<img src= \"./marker/icon-flood2.png"\" width=\"400px\" height=\"150px\"></i>ตำแหน่งที่ยังไม่ต้องการความช่วยเหลือ</label></div><br>`;
+        div.innerHTML += `ระดับน้ำในแม่น้ำ<br>`;
+        div.innerHTML += `<img src= \"./marker/iconpoint1.png"\" width=\"400px\" height=\"150px\"></i>ระดับน้ำ >= 10 เมตร (น้ำน้อยวิกฤต)</label></div><br>`;
+        div.innerHTML += `<img src= \"./marker/iconpoint2.png"\" width=\"400px\" height=\"150px\"></i>ระดับน้ำ > 10-30 เมตร (น้ำน้อย)</label></div><br>`;
+        div.innerHTML += `<img src= \"./marker/iconpoint3.png"\" width=\"400px\" height=\"150px\"></i>ระดับน้ำ > 30-70 เมตร (น้ำปกติ)</label></div><br>`;
+        div.innerHTML += `<img src= \"./marker/iconpoint4.png"\" width=\"400px\" height=\"150px\"></i>ระดับน้ำ > 70-100 เมตร (น้ำมาก)</label></div><br>`;
+        div.innerHTML += `<img src= \"./marker/iconpoint5.png"\" width=\"400px\" height=\"150px\"></i>ระดับน้ำ > 100 เมตร (น้ำล้นตลิ่ง)</label></div><br>`;
         return div;
     };
     legend.addTo(map);
