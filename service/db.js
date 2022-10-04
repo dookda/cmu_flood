@@ -3,9 +3,9 @@ const { Client } = require('pg')
 
 const db = new Pool({
     user: 'postgres',
-    host: '119.59.125.134',
+    host: 'localhost',
     database: 'cmu_flood',
-    password: 'Pgis@rti2dss@2020',
+    password: 'Eec-MIS2564db',
     port: 5432,
 });
 
