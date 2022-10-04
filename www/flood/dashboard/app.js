@@ -89,7 +89,7 @@ let getmarker = (d) => {
     });
     var MIcon_02 = L.icon({
         iconUrl: './marker/icon-flood2.png',
-        iconSize: [50, 50],
+        iconSize: [60, 60],
         iconAnchor: [30, 50],
         popupAnchor: [0, -10]
     });
@@ -102,7 +102,12 @@ let getmarker = (d) => {
 
     ms = L.layerGroup()
     d.map(i => {
-        // console.log(i)
+        let helptext
+        if (i.help_text !== null) {
+            helptext = i.help_text
+        } else {
+            helptext = "ไม่ระบุ"
+        }
         if (i.geojson) {
             let json = JSON.parse(i.geojson);
             // json.properties = { bioname: i.bioname, biodetail: i.biodetail, img: i.img };
@@ -113,7 +118,7 @@ let getmarker = (d) => {
                     }
                 })
                     .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
-                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> <h6> <b>รายละเอียด</b>: ${i.help_text} <br> </h6> <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
+                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> <h6> <b>รายละเอียด</b>: ${helptext} <br> </h6> <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
                 // .addTo(map)
                 ms.addLayer(mm);
             } else if (i.help == 'ไม่ต้องการ') {
@@ -123,7 +128,7 @@ let getmarker = (d) => {
                     }
                 })
                     .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
-                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> <h6> <b>รายละเอียด</b>: ${i.help_text} <br> </h6> <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
+                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> <h6> <b>รายละเอียด</b>: ${helptext} <br> </h6> <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
                 // .addTo(map)
                 ms.addLayer(mm);
             } else {
@@ -133,7 +138,7 @@ let getmarker = (d) => {
                     }
                 })
                     .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
-                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> <h6> <b>รายละเอียด</b>: ${i.help_text} <br> </h6> <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
+                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> <h6> <b>รายละเอียด</b>: ${helptext} <br> </h6> <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
                 // .addTo(map)
                 ms.addLayer(mm);
             }
