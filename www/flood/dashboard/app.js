@@ -256,3 +256,38 @@ function showFrame(nextPosition) {
     changeRadarPosition(nextPosition);
     changeRadarPosition(nextPosition + preloadingDirection, true);
 }
+
+var legend = L.control({ position: "bottomright" });
+function showLegend() {
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create("div", "legend");
+        div.innerHTML += `<div class="mt-2" onClick="hideLegend()">
+          <span class="kanit">ซ่อนสัญลักษณ์</span><i class="fa fa-angle-double-down" aria-hidden="true"></i>
+        </div>`;
+        div.innerHTML += `<img src= \"./../assets/img/radar.png"\" width=\"400px\" height=\"150px\"></i>เรดาห์น้ำฝน</label></div><br>`;
+        div.innerHTML += `<i style="background: #b6060c; border-style: solid; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 1</span><br>`;
+        div.innerHTML += `<i style="background: #da0704; border-style: dotted; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 2</span><br>`;
+        div.innerHTML += `<i style="background: #ff3b25; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 3</span><br>`;
+        div.innerHTML += `<i style="background: #ff7919; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 4</span><br>`;
+        div.innerHTML += `<i style="background: #ffcb8b; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 5</span><br>`;
+        div.innerHTML += `<i style="background: #ffc739; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 6</span><br>`;
+        div.innerHTML += `<i style="background: #fff25f; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 7</span><br>`;
+        div.innerHTML += `<img src= \"./marker/icon-flood1.png"\" width=\"400px\" height=\"150px\"></i>ตำแหน่งที่ต้องการความช่วยเหลือ</label></div><br>`;
+        div.innerHTML += `<img src= \"./marker/icon-flood2.png"\" width=\"400px\" height=\"150px\"></i>ตำแหน่งที่ยังไม่ต้องการความช่วยเหลือ</label></div><br>`;
+        return div;
+    };
+    legend.addTo(map);
+}
+function hideLegend() {
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info legend')
+        div.innerHTML += `<div class="mt-2" onClick="showLegend()">
+        <small class="prompt"><span class="kanit" style="font-size: 14px;" >แสดงสัญลักษณ์</span></small> 
+        <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+    </div>`;
+        return div;
+    };
+    legend.addTo(map);
+}
+// showLegend()
+hideLegend()
