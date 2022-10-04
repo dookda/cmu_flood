@@ -1,0 +1,169 @@
+.body {
+  background-color: #E8E8ED;
+}
+
+.card {
+  background-color: #F4FAFF;
+  border-radius: 15px;
+  box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11), 0 0px 46px rgba(0, 0, 0, 0.04);
+}
+
+.card-board {
+  background-color: #FFFF;
+  border-radius: 13px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0px 25px rgba(0, 0, 0, 0.11), 0 0px 46px rgba(0, 0, 0, 0.04);
+}
+
+.card-chart {
+  background-color: #FFFF;
+  box-shadow: 0 0px 25px rgba(0, 0, 0, 0.11), 0 0px 46px rgba(0, 0, 0, 0.04);
+  border-radius: 15px;
+  height: fit-content;
+
+}
+
+#map {
+  width: 100%;
+  height: 600px;
+  border-radius: 15px;
+  /* border-top-left-radius: 15px;
+  border-top-right-radius: 15px; */
+}
+
+#cardtable {
+  background-color: #FFFF;
+
+}
+
+.leaflet-control-layers-list {
+  margin-top: -50px;
+  margin-bottom: -50px;
+  height: fit-content;
+}
+
+#chartdiv {
+  width: 100%;
+  height: 450px;
+}
+
+#legenddiv {
+  width: 100%;
+  height: fit-content;
+  /* border: 1px dotted #c99; */
+}
+
+#legendwrapper {
+  width: 100%;
+  height: fit-content;
+  /* border: 1px dotted #c99; */
+  margin: 1em 0;
+}
+
+#legendwrapper {
+  max-height: 120px;
+  overflow-x: none;
+  overflow-y: auto;
+}
+
+.btn-loaction {
+  color: #FFFFFF;
+  background-color: #7cc;
+  border-color: #8AD3D3;
+}
+
+.btn-loaction:hover,
+.btn-loaction:focus,
+.btn-loaction:active,
+.btn-loaction.active,
+.open .dropdown-toggle.btn-loaction {
+  color: #FFFFFF;
+  background-color: #52BEBE;
+  border-color: #8AD3D3;
+}
+
+.btn-loaction:active,
+.btn-loaction.active,
+.open .dropdown-toggle.btn-loaction {
+  background-image: none;
+}
+
+.btn-loaction.disabled,
+.btn-loaction[disabled],
+fieldset[disabled] .btn-loaction,
+.btn-loaction.disabled:hover,
+.btn-loaction[disabled]:hover,
+fieldset[disabled] .btn-loaction:hover,
+.btn-loaction.disabled:focus,
+.btn-loaction[disabled]:focus,
+fieldset[disabled] .btn-loaction:focus,
+.btn-loaction.disabled:active,
+.btn-loaction[disabled]:active,
+fieldset[disabled] .btn-loaction:active,
+.btn-loaction.disabled.active,
+.btn-loaction[disabled].active,
+fieldset[disabled] .btn-loaction.active {
+  background-color: #7cc;
+  border-color: #8AD3D3;
+}
+
+.btn-loaction .badge {
+  color: #7cc;
+  background-color: #FFFFFF;
+}
+
+.c-chart {
+  height: 450px;
+  background-color: white;
+  margin-bottom: 20px;
+  border-radius: 12px;
+}
+
+/*Legend specific*/
+.legend {
+  padding: 6px 8px;
+  font: 14px Arial, Helvetica, sans-serif;
+  font-family: "Kanit", sans-serif !important;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+  border-radius: 5px;
+  line-height: 24px;
+  color: #555;
+}
+
+.legend h4 {
+  text-align: center;
+  font-size: 14px;
+  margin: 2px 12px 8px;
+  /* color: #777; */
+}
+
+.legend span {
+  position: relative;
+  bottom: 3px;
+  font-family: "Kanit", sans-serif !important;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin: 0 8px 0 0;
+  /* opacity: 0.7; */
+}
+
+.legend img {
+  width: 20px;
+  height: 20px;
+  float: left;
+  margin: 0 8px 0 0;
+  opacity: 0.7;
+}
+
+.legend i.icon {
+  background-size: 18px;
+  background-color: rgba(255, 255, 255, 1);
+}
