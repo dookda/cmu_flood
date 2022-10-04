@@ -38,13 +38,17 @@ const Zoneflood = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/cm_fl
 });
 
 var radar = L.layerGroup()
+var ms = L.layerGroup()
+var watlev = L.layerGroup()
 const baseMaps = {
     "Mapbox": mapbox,
     "Google Hybrid": ghyb.addTo(map)
 };
 
 const overlayMaps = {
+    "ตำแหน่งน้ำท่วม": ms.addTo(map),
     "ขอบเขตระดับพื้นที่เสี่ยงน้ำท่วม": Zoneflood,
+    "ระดับน้ำ": watlev.addTo(map),
     "เรดาห์ฝน": radar.addTo(map)
 };
 
@@ -71,12 +75,7 @@ let getdata = () => {
     })
 }
 
-getdata()
-
 let getmarker = (d) => {
-    // console.log(d)
-
-    var mm, ms
     map.eachLayer(i => {
         i.options.name == "marker" ? map.removeLayer(i) : null;
     });
@@ -100,47 +99,123 @@ let getmarker = (d) => {
         popupAnchor: [0, -10]
     });
 
-    ms = L.layerGroup()
     d.map(i => {
         // console.log(i)
         if (i.geojson) {
             let json = JSON.parse(i.geojson);
             // json.properties = { bioname: i.bioname, biodetail: i.biodetail, img: i.img };
             if (i.help == 'ต้องการ') {
-                mm = L.geoJson(json, {
+                let mm = L.geoJson(json, {
                     pointToLayer: function (feature, latlng) {
                         return L.marker(latlng, { name: "marker", icon: MIcon_01 });
                     }
-                })
-                    .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
-                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> <h6> <b>รายละเอียด</b>: ${i.help_text} <br> </h6> <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
-                // .addTo(map)
+                }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6>
+                <h6><b>สถานะ :</b> ${i.status}</h6>
+                <h6><b>การสัญจร :</b> ${i.travel}</h6>
+                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
+                <h6><b>รายละเอียด</b>: ${i.help_text} <br> </h6> 
+                <h6><b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> 
+                <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
                 ms.addLayer(mm);
             } else if (i.help == 'ไม่ต้องการ') {
-                mm = L.geoJson(json, {
+                let mm = L.geoJson(json, {
                     pointToLayer: function (feature, latlng) {
                         return L.marker(latlng, { name: "marker", icon: MIcon_02 });
                     }
-                })
-                    .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
-                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> <h6> <b>รายละเอียด</b>: ${i.help_text} <br> </h6> <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
-                // .addTo(map)
+                }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6>
+                <h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
+                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
+                <h6><b>รายละเอียด</b>: ${i.help_text} <br> </h6> 
+                <h6><b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> 
+                <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
                 ms.addLayer(mm);
             } else {
-                mm = L.geoJson(json, {
+                let mm = L.geoJson(json, {
                     pointToLayer: function (feature, latlng) {
                         return L.marker(latlng, { name: "marker", icon: MIcon_03 });
                     }
-                })
-                    .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
-                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> <h6> <b>รายละเอียด</b>: ${i.help_text} <br> </h6> <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
-                // .addTo(map)
+                }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6>
+                <h6><b>การสัญจร :</b> ${i.travel}</h6>
+                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
+                <h6><b>รายละเอียด</b>: ${i.help_text} <br> </h6> 
+                <h6><b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> 
+                <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
                 ms.addLayer(mm);
             }
         }
     });
-    ms.addTo(map)
-    // lyrControl.addOverlay(ms, "ตำแหน่งหน่วยงานที่รายงาน...")
+}
+
+let getThaiwaterApi = () => {
+    axios.get("https://api-v3.thaiwater.net/api/v1/thaiwater30/public/waterlevel_load").then(r => {
+        r.data.waterlevel_data.data.map(i => {
+
+            if (i.station.tele_station_lat && i.storage_percent) {
+                console.log(i);
+                if (Number(i.storage_percent) <= 10) {
+                    let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
+                        radius: 3,
+                        color: '#db802b',
+                        fillColor: '#db802b',
+                        fillOpacity: 0.9
+                    }).bindPopup(`<h4>น้ำน้อยวิกฤต</h4>
+                    สถานี${i.station.tele_station_name.th} ต.${i.geocode.tumbon_name.th} อ.${i.geocode.amphoe_name.th} จ.${i.geocode.province_name.th}</br>
+                    ระดับน้ำ: ${i.waterlevel_msl} ม.รทก</br>
+                    ระดับตลิ่ง: ${i.station.min_bank} ม.รทก</br>
+                    ความจุลำน้ำ: <span class="badge rounded-pill text-bg-1">${i.storage_percent} % </span>`)
+                    watlev.addLayer(mk)
+                } else if (Number(i.storage_percent) <= 30) {
+                    let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
+                        radius: 3,
+                        color: '#ffc000',
+                        fillColor: '#ffc000',
+                        fillOpacity: 0.9
+                    }).bindPopup(`<h4>น้ำน้อย</h4>
+                    สถานี${i.station.tele_station_name.th} ต.${i.geocode.tumbon_name.th} อ.${i.geocode.amphoe_name.th} จ.${i.geocode.province_name.th}</br>
+                    ระดับน้ำ: ${i.waterlevel_msl} ม.รทก</br>
+                    ระดับตลิ่ง: ${i.station.min_bank} ม.รทก</br>
+                    ความจุลำน้ำ: <span class="badge rounded-pill text-bg-2">${i.storage_percent} % </span>`)
+                    watlev.addLayer(mk)
+                } else if (Number(i.storage_percent) <= 70) {
+                    let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
+                        radius: 3,
+                        color: '#00b050',
+                        fillColor: '#00b050',
+                        fillOpacity: 0.9
+                    }).bindPopup(`<h4>น้ำปกติ</h4>
+                    สถานี${i.station.tele_station_name.th} ต.${i.geocode.tumbon_name.th} อ.${i.geocode.amphoe_name.th} จ.${i.geocode.province_name.th}</br>
+                    ระดับน้ำ: ${i.waterlevel_msl} ม.รทก</br>
+                    ระดับตลิ่ง: ${i.station.min_bank} ม.รทก</br>
+                    ความจุลำน้ำ: <span class="badge rounded-pill text-bg-3">${i.storage_percent} % </span>`)
+                    watlev.addLayer(mk)
+                } else if (Number(i.storage_percent) <= 100) {
+                    let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
+                        radius: 3,
+                        color: '#003dfa',
+                        fillColor: '#003dfa',
+                        fillOpacity: 0.9
+                    }).bindPopup(`<h4>น้ำมาก</h4>
+                    สถานี${i.station.tele_station_name.th} ต.${i.geocode.tumbon_name.th} อ.${i.geocode.amphoe_name.th} จ.${i.geocode.province_name.th}</br>
+                    ระดับน้ำ: ${i.waterlevel_msl} ม.รทก</br>
+                    ระดับตลิ่ง: ${i.station.min_bank} ม.รทก</br>
+                    ความจุลำน้ำ: <span class="badge rounded-pill text-bg-4">${i.storage_percent} % </span>`)
+                    watlev.addLayer(mk)
+                } else {
+                    let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
+                        radius: 3,
+                        color: '#ff0000',
+                        fillColor: '#ff0000',
+                        fillOpacity: 0.9
+                    }).bindPopup(`<h4>น้ำล้นตลิ่ง</h4>
+                    สถานี${i.station.tele_station_name.th} ต.${i.geocode.tumbon_name.th} อ.${i.geocode.amphoe_name.th} จ.${i.geocode.province_name.th}</br>
+                    ระดับน้ำ: ${i.waterlevel_msl} ม.รทก</br>
+                    ระดับตลิ่ง: ${i.station.min_bank} ม.รทก</br>
+                    ความจุลำน้ำ: <span class="badge rounded-pill text-bg-5">${i.storage_percent} % </span>`)
+                    watlev.addLayer(mk)
+                }
+            }
+        })
+    })
 }
 
 let refreshPage = () => {
@@ -148,14 +223,11 @@ let refreshPage = () => {
     // console.log("ok");
 }
 
-
 var apiData = {};
 var mapFrames = [];
 var lastPastFramePosition = -1;
 var radarLayers = [];
-
 var optionKind = 'radar'; // can be 'radar' or 'satellite'
-
 var optionTileSize = 256; // can be 256 or 512.
 var optionColorScheme = 2; // from 0 to 8. Check the https://rainviewer.com/api/color-schemes.html for additional information
 var optionSmoothData = 1; // 0 - not smooth, 1 - smooth
@@ -174,11 +246,9 @@ apiRequest.onload = function (e) {
 apiRequest.send();
 
 function initialize(api, kind) {
-    // remove all already added tiled layers
     for (var i in radarLayers) {
         map.removeLayer(radarLayers[i]);
     }
-
 
     mapFrames = [];
     radarLayers = [];
@@ -216,7 +286,6 @@ function addLayer(frame) {
             zIndex: frame.time,
             name: "aa"
         })
-
     }
 
     if (!map.hasLayer(radarLayers[frame.path])) {
@@ -290,4 +359,6 @@ function hideLegend() {
     legend.addTo(map);
 }
 // showLegend()
-hideLegend()
+getdata();
+getThaiwaterApi();
+hideLegend();

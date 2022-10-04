@@ -167,3 +167,28 @@ fieldset[disabled] .btn-loaction.active {
   background-size: 18px;
   background-color: rgba(255, 255, 255, 1);
 }
+
+.text-bg-1 {
+  background-color: #db802b;
+  color: #fff;
+}
+
+.text-bg-2 {
+  background-color: #ffc000;
+  color: #fff;
+}
+
+.text-bg-3 {
+  background-color: #00b050;
+  color: #fff;
+}
+
+.text-bg-4 {
+  background-color: #003dfa;
+  color: #fff;
+}
+
+.text-bg-5 {
+  background-color: #ff0000;
+  color: #fff;
+}
