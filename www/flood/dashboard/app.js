@@ -123,8 +123,8 @@ let getmarker = (d) => {
                 <h6><b>สถานะ :</b> ${i.status}</h6>
                 <h6><b>การสัญจร :</b> ${i.travel}</h6>
                 <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
-                <h6><b>รายละเอียด</b>: ${helptext} <br> </h6> 
-                <h6><b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> 
+                <h6><b>รายละเอียด</b>: ${helptext} </h6> 
+                <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
                 <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
                 // .addTo(map)
                 ms.addLayer(mm);
@@ -137,8 +137,8 @@ let getmarker = (d) => {
                 <h6><b>สถานะ :</b> ${i.status}</h6>
                 <h6><b>การสัญจร :</b> ${i.travel}</h6>
                 <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
-                <h6><b>รายละเอียด</b>: ${helptext} <br> </h6> 
-                <h6><b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> 
+                <h6><b>รายละเอียด</b>: ${helptext} </h6> 
+                <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
                 <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
                 // .addTo(map)
                 ms.addLayer(mm);
@@ -151,8 +151,8 @@ let getmarker = (d) => {
                 <h6><b>สถานะ :</b> ${i.status}</h6>
                 <h6><b>การสัญจร :</b> ${i.travel}</h6>
                 <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
-                <h6> <b>รายละเอียด</b>: ${helptext} <br> </h6> 
-                <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> 
+                <h6> <b>รายละเอียด</b>: ${helptext} </h6> 
+                <h6> <b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
                 <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
                 // .addTo(map)
                 ms.addLayer(mm);
