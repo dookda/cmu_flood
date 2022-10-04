@@ -149,7 +149,7 @@ let getThaiwaterApi = () => {
         r.data.waterlevel_data.data.map(i => {
 
             if (i.station.tele_station_lat && i.storage_percent) {
-                console.log(i);
+                // console.log(i);
                 if (Number(i.storage_percent) <= 10) {
                     let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
                         radius: 3,
