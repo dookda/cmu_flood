@@ -1,5 +1,3 @@
-// const url = "https://engrids.soc.cmu.ac.th/api";
-
 let latlng = {
     lat: 18.795596138999183,
     lng: 98.99357810528674
@@ -10,7 +8,6 @@ let map = L.map('map', {
 });
 
 let marker, gps;
-
 const url = "https://engrids.soc.cmu.ac.th/p3600";
 
 function loadMap() {
@@ -143,7 +140,6 @@ let postData = async () => {
 
 $(document).ready(() => {
     loadMap();
-    // getData();
 });
 
 $("#help1").on("click", function () {
