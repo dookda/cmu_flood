@@ -38,6 +38,8 @@ const Zoneflood = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/cm_fl
 });
 
 var radar = L.layerGroup()
+var ms = L.layerGroup()
+var watlev = L.layerGroup()
 const baseMaps = {
     "Mapbox": mapbox,
     "Google Hybrid": ghyb.addTo(map)
@@ -45,6 +47,7 @@ const baseMaps = {
 
 const overlayMaps = {
     "ขอบเขตระดับพื้นที่เสี่ยงน้ำท่วม": Zoneflood.addTo(map),
+    "ระดับน้ำ": watlev.addTo(map),
     "เรดาห์ฝน": radar.addTo(map)
 };
 
@@ -71,25 +74,20 @@ let getdata = () => {
     })
 }
 
-getdata()
-
 let getmarker = (d) => {
-    // console.log(d)
-
-    var mm, ms
     map.eachLayer(i => {
         i.options.name == "marker" ? map.removeLayer(i) : null;
     });
 
     var MIcon_01 = L.icon({
         iconUrl: './marker/icon-flood1.png',
-        iconSize: [50, 50],
+        iconSize: [55, 55],
         iconAnchor: [30, 50],
         popupAnchor: [0, -10]
     });
     var MIcon_02 = L.icon({
         iconUrl: './marker/icon-flood2.png',
-        iconSize: [60, 60],
+        iconSize: [55, 55],
         iconAnchor: [30, 50],
         popupAnchor: [0, -10]
     });
@@ -100,7 +98,6 @@ let getmarker = (d) => {
         popupAnchor: [0, -10]
     });
 
-    ms = L.layerGroup()
     d.map(i => {
         let helptext
         if (i.help_text !== null) {
@@ -112,7 +109,7 @@ let getmarker = (d) => {
             let json = JSON.parse(i.geojson);
             // json.properties = { bioname: i.bioname, biodetail: i.biodetail, img: i.img };
             if (i.help == 'ต้องการ') {
-                mm = L.geoJson(json, {
+                let mm = L.geoJson(json, {
                     pointToLayer: function (feature, latlng) {
                         return L.marker(latlng, { name: "marker", icon: MIcon_01 });
                     }
@@ -122,7 +119,7 @@ let getmarker = (d) => {
                 // .addTo(map)
                 ms.addLayer(mm);
             } else if (i.help == 'ไม่ต้องการ') {
-                mm = L.geoJson(json, {
+                let mm = L.geoJson(json, {
                     pointToLayer: function (feature, latlng) {
                         return L.marker(latlng, { name: "marker", icon: MIcon_02 });
                     }
@@ -132,7 +129,7 @@ let getmarker = (d) => {
                 // .addTo(map)
                 ms.addLayer(mm);
             } else {
-                mm = L.geoJson(json, {
+                let mm = L.geoJson(json, {
                     pointToLayer: function (feature, latlng) {
                         return L.marker(latlng, { name: "marker", icon: MIcon_03 });
                     }
@@ -144,8 +141,78 @@ let getmarker = (d) => {
             }
         }
     });
-    ms.addTo(map)
-    // lyrControl.addOverlay(ms, "ตำแหน่งหน่วยงานที่รายงาน...")
+}
+
+let getThaiwaterApi = () => {
+    axios.get("https://api-v3.thaiwater.net/api/v1/thaiwater30/public/waterlevel_load").then(r => {
+        r.data.waterlevel_data.data.map(i => {
+
+            if (i.station.tele_station_lat && i.storage_percent) {
+                // console.log(i);
+                if (Number(i.storage_percent) <= 10) {
+                    let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
+                        radius: 3,
+                        color: '#db802b',
+                        fillColor: '#db802b',
+                        fillOpacity: 0.9
+                    }).bindPopup(`<h4>น้ำน้อยวิกฤต</h4>
+                    สถานี${i.station.tele_station_name.th} ต.${i.geocode.tumbon_name.th} อ.${i.geocode.amphoe_name.th} จ.${i.geocode.province_name.th}</br>
+                    ระดับน้ำ: ${i.waterlevel_msl} ม.รทก</br>
+                    ระดับตลิ่ง: ${i.station.min_bank} ม.รทก</br>
+                    ความจุลำน้ำ: <span class="badge rounded-pill text-bg-1">${i.storage_percent} % </span>`)
+                    watlev.addLayer(mk)
+                } else if (Number(i.storage_percent) <= 30) {
+                    let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
+                        radius: 3,
+                        color: '#ffc000',
+                        fillColor: '#ffc000',
+                        fillOpacity: 0.9
+                    }).bindPopup(`<h4>น้ำน้อย</h4>
+                    สถานี${i.station.tele_station_name.th} ต.${i.geocode.tumbon_name.th} อ.${i.geocode.amphoe_name.th} จ.${i.geocode.province_name.th}</br>
+                    ระดับน้ำ: ${i.waterlevel_msl} ม.รทก</br>
+                    ระดับตลิ่ง: ${i.station.min_bank} ม.รทก</br>
+                    ความจุลำน้ำ: <span class="badge rounded-pill text-bg-2">${i.storage_percent} % </span>`)
+                    watlev.addLayer(mk)
+                } else if (Number(i.storage_percent) <= 70) {
+                    let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
+                        radius: 3,
+                        color: '#00b050',
+                        fillColor: '#00b050',
+                        fillOpacity: 0.9
+                    }).bindPopup(`<h4>น้ำปกติ</h4>
+                    สถานี${i.station.tele_station_name.th} ต.${i.geocode.tumbon_name.th} อ.${i.geocode.amphoe_name.th} จ.${i.geocode.province_name.th}</br>
+                    ระดับน้ำ: ${i.waterlevel_msl} ม.รทก</br>
+                    ระดับตลิ่ง: ${i.station.min_bank} ม.รทก</br>
+                    ความจุลำน้ำ: <span class="badge rounded-pill text-bg-3">${i.storage_percent} % </span>`)
+                    watlev.addLayer(mk)
+                } else if (Number(i.storage_percent) <= 100) {
+                    let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
+                        radius: 3,
+                        color: '#003dfa',
+                        fillColor: '#003dfa',
+                        fillOpacity: 0.9
+                    }).bindPopup(`<h4>น้ำมาก</h4>
+                    สถานี${i.station.tele_station_name.th} ต.${i.geocode.tumbon_name.th} อ.${i.geocode.amphoe_name.th} จ.${i.geocode.province_name.th}</br>
+                    ระดับน้ำ: ${i.waterlevel_msl} ม.รทก</br>
+                    ระดับตลิ่ง: ${i.station.min_bank} ม.รทก</br>
+                    ความจุลำน้ำ: <span class="badge rounded-pill text-bg-4">${i.storage_percent} % </span>`)
+                    watlev.addLayer(mk)
+                } else {
+                    let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
+                        radius: 3,
+                        color: '#ff0000',
+                        fillColor: '#ff0000',
+                        fillOpacity: 0.9
+                    }).bindPopup(`<h4>น้ำล้นตลิ่ง</h4>
+                    สถานี${i.station.tele_station_name.th} ต.${i.geocode.tumbon_name.th} อ.${i.geocode.amphoe_name.th} จ.${i.geocode.province_name.th}</br>
+                    ระดับน้ำ: ${i.waterlevel_msl} ม.รทก</br>
+                    ระดับตลิ่ง: ${i.station.min_bank} ม.รทก</br>
+                    ความจุลำน้ำ: <span class="badge rounded-pill text-bg-5">${i.storage_percent} % </span>`)
+                    watlev.addLayer(mk)
+                }
+            }
+        })
+    })
 }
 
 let refreshPage = () => {
@@ -153,14 +220,11 @@ let refreshPage = () => {
     // console.log("ok");
 }
 
-
 var apiData = {};
 var mapFrames = [];
 var lastPastFramePosition = -1;
 var radarLayers = [];
-
 var optionKind = 'radar'; // can be 'radar' or 'satellite'
-
 var optionTileSize = 256; // can be 256 or 512.
 var optionColorScheme = 2; // from 0 to 8. Check the https://rainviewer.com/api/color-schemes.html for additional information
 var optionSmoothData = 1; // 0 - not smooth, 1 - smooth
@@ -179,11 +243,9 @@ apiRequest.onload = function (e) {
 apiRequest.send();
 
 function initialize(api, kind) {
-    // remove all already added tiled layers
     for (var i in radarLayers) {
         map.removeLayer(radarLayers[i]);
     }
-
 
     mapFrames = [];
     radarLayers = [];
@@ -221,7 +283,6 @@ function addLayer(frame) {
             zIndex: frame.time,
             name: "aa"
         })
-
     }
 
     if (!map.hasLayer(radarLayers[frame.path])) {
@@ -279,11 +340,12 @@ function showLegend() {
         div.innerHTML += `<i style="background: #fff25f; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 7</span><br>`;
         div.innerHTML += `<img src= \"./marker/icon-flood1.png"\" width=\"400px\" height=\"150px\"></i>ตำแหน่งที่ต้องการความช่วยเหลือ</label></div><br>`;
         div.innerHTML += `<img src= \"./marker/icon-flood2.png"\" width=\"400px\" height=\"150px\"></i>ตำแหน่งที่ยังไม่ต้องการความช่วยเหลือ</label></div><br>`;
-        div.innerHTML += `<i style="background: #DB7E45; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 7</span><br>`;
-        div.innerHTML += `<i style="background: #FFD864; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 7</span><br>`;
-        div.innerHTML += `<i style="background: #05CD53; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 7</span><br>`;
-        div.innerHTML += `<i style="background: #439FFF; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 7</span><br>`;
-        div.innerHTML += `<i style="background: #FF4646; border-radius: 10%; border-width: 1.5px;"></i><span>พื้นที่น้ำท่วมลำดับ 7</span><br>`;
+        div.innerHTML += `ระดับน้ำในแม่น้ำ<br>`;
+        div.innerHTML += `<img src= \"./marker/iconpoint1.png"\" width=\"400px\" height=\"150px\"></i>ระดับน้ำ >= 10 เมตร (น้ำน้อยวิกฤต)</label></div><br>`;
+        div.innerHTML += `<img src= \"./marker/iconpoint2.png"\" width=\"400px\" height=\"150px\"></i>ระดับน้ำ > 10-30 เมตร (น้ำน้อย)</label></div><br>`;
+        div.innerHTML += `<img src= \"./marker/iconpoint3.png"\" width=\"400px\" height=\"150px\"></i>ระดับน้ำ > 30-70 เมตร (น้ำปกติ)</label></div><br>`;
+        div.innerHTML += `<img src= \"./marker/iconpoint4.png"\" width=\"400px\" height=\"150px\"></i>ระดับน้ำ > 70-100 เมตร (น้ำมาก)</label></div><br>`;
+        div.innerHTML += `<img src= \"./marker/iconpoint5.png"\" width=\"400px\" height=\"150px\"></i>ระดับน้ำ > 100 เมตร (น้ำล้นตลิ่ง)</label></div><br>`;
         return div;
     };
     legend.addTo(map);
@@ -300,4 +362,6 @@ function hideLegend() {
     legend.addTo(map);
 }
 // showLegend()
-hideLegend()
+getdata();
+getThaiwaterApi();
+hideLegend();
