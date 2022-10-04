@@ -106,7 +106,7 @@ let getmarker = (d) => {
         if (i.help_text !== null) {
             helptext = i.help_text
         } else {
-            helptext = "ไม่ระบุ"
+            helptext = "-"
         }
         if (i.geojson) {
             let json = JSON.parse(i.geojson);
