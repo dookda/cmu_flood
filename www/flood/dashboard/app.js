@@ -77,12 +77,7 @@ let getdata = () => {
 
 let getmarker = (d) => {
     // console.log(d)
-<<<<<<< HEAD
-    var mm, ms
-=======
-
     // var mm, ms
->>>>>>> b827ab0b1c8afdb750548422592626463f8e3608
     map.eachLayer(i => {
         i.options.name == "marker" ? map.removeLayer(i) : null;
     });
@@ -100,17 +95,13 @@ let getmarker = (d) => {
         popupAnchor: [-5, -40]
     });
     var MIcon_03 = L.icon({
-        iconUrl: './marker/icon-other.png',
+        iconUrl: './marker/icon-flood3.png',
         iconSize: [50, 50],
         iconAnchor: [30, 50],
         popupAnchor: [-5, -40]
     });
 
-<<<<<<< HEAD
-    ms = L.layerGroup()
-=======
     // ms = L.layerGroup()
->>>>>>> b827ab0b1c8afdb750548422592626463f8e3608
     d.map(i => {
         let helptext
         if (i.help_text !== null) {
@@ -397,10 +388,8 @@ hideLegend();
 $("#detail").click(function () {
     $("#Modaldetail").modal('show')
 
-<<<<<<< HEAD
+
 })
 
+$("#Modaldetail").modal('show')
 
-=======
-})
->>>>>>> b827ab0b1c8afdb750548422592626463f8e3608
