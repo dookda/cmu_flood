@@ -1,5 +1,5 @@
-// const url = "https://engrids.soc.cmu.ac.th/p3600";
-const url = "http://localhost:3600";
+const url = "https://engrids.soc.cmu.ac.th/p3600";
+// const url = "http://localhost:3600";
 let latlng = {
     lat: 18.784033,
     lng: 99.004762
