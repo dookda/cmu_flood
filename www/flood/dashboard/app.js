@@ -183,31 +183,31 @@ let getThaiwaterApi = () => {
                 iconUrl: './marker/icon-wtl1.png',
                 iconSize: [30, 30],
                 iconAnchor: [30, 50],
-                popupAnchor: [-5, -40]
+                popupAnchor: [-13, -40]
             });
             var WIcon_02 = L.icon({
                 iconUrl: './marker/icon-wtl2.png',
                 iconSize: [30, 30],
                 iconAnchor: [30, 50],
-                popupAnchor: [-5, -40]
+                popupAnchor: [-13, -40]
             });
             var WIcon_03 = L.icon({
                 iconUrl: './marker/icon-wtl3.png',
                 iconSize: [30, 30],
                 iconAnchor: [30, 50],
-                popupAnchor: [-5, -40]
+                popupAnchor: [-13, -40]
             });
             var WIcon_04 = L.icon({
                 iconUrl: './marker/icon-wtl4.png',
                 iconSize: [30, 30],
                 iconAnchor: [30, 50],
-                popupAnchor: [-5, -40]
+                popupAnchor: [-13, -40]
             });
             var WIcon_05 = L.icon({
                 iconUrl: './marker/icon-wtl5.png',
                 iconSize: [30, 30],
                 iconAnchor: [30, 50],
-                popupAnchor: [-5, -40]
+                popupAnchor: [-13, -40]
             });
 
             if (i.station.tele_station_lat && i.storage_percent) {
