@@ -133,7 +133,7 @@ let getmarker = (d) => {
                     <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
                     <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">
                     <hr>
-                    <button class="btn btn-success" onclick="getDirection()">นำทาง</button>`)
+                    <button class="btn btn-success kanit" onclick="getDirection()">นำทาง</button>`)
                     // .addTo(map)
                     ms.addLayer(mm);
                 } else if (i.help == 'ไม่ต้องการ') {
@@ -149,7 +149,7 @@ let getmarker = (d) => {
                     <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
                     <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">
                     <hr>
-                    <button class="btn btn-success" onclick="getDirection()">นำทาง</button>`)
+                    <button class="btn btn-success kanit" onclick="getDirection()">นำทาง</button>`)
                     // .addTo(map)
                     ms.addLayer(mm);
                 }
@@ -166,7 +166,7 @@ let getmarker = (d) => {
                 <h6> <b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
                 <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">
                 <hr>
-                <button class="btn btn-success" onclick="getDirection()">นำทาง</button>`)
+                <button class="btn btn-success kanit" onclick="getDirection()">นำทาง</button>`)
                 // .addTo(map)
                 ms.addLayer(mm);
             }

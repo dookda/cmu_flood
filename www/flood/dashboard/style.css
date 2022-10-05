@@ -1,6 +1,12 @@
 .body {
   background-color: #E8E8ED;
+  font-family: "Kanit";
 }
+
+.kanit {
+  font-family: "Kanit";
+}
+
 
 .card {
   background-color: #F4FAFF;
