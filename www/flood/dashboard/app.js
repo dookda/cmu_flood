@@ -75,11 +75,11 @@ let getdata = () => {
     })
 }
 
-let getDirection = () => {
+let getDirection = (lat, lng) => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(i => {
             // location.href = 
-            window.open(`https://www.google.com/maps/dir/${i.coords.latitude},${i.coords.longitude}/${i.lat},${i.lng}`, '_blank')
+            window.open(`https://www.google.com/maps/dir/${i.coords.latitude},${i.coords.longitude}/${lat},${lng}`, '_blank')
         });
     }
 }
@@ -133,7 +133,7 @@ let getmarker = (d) => {
                     <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
                     <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">
                     <hr>
-                    <button class="btn btn-success kanit" onclick="getDirection()">นำทาง</button>`)
+                    <button class="btn btn-success kanit" onclick="getDirection(${i.lat},${i.lng})">นำทาง</button>`)
                     // .addTo(map)
                     ms.addLayer(mm);
                 } else if (i.help == 'ไม่ต้องการ') {
@@ -149,7 +149,7 @@ let getmarker = (d) => {
                     <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
                     <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">
                     <hr>
-                    <button class="btn btn-success kanit" onclick="getDirection()">นำทาง</button>`)
+                    <button class="btn btn-success kanit" onclick="getDirection(${i.lat},${i.lng})">นำทาง</button>`)
                     // .addTo(map)
                     ms.addLayer(mm);
                 }
@@ -166,7 +166,7 @@ let getmarker = (d) => {
                 <h6> <b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
                 <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">
                 <hr>
-                <button class="btn btn-success kanit" onclick="getDirection()">นำทาง</button>`)
+                <button class="btn btn-success kanit" onclick="getDirection(${i.lat},${i.lng})">นำทาง</button>`)
                 // .addTo(map)
                 ms.addLayer(mm);
             }
