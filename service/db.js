@@ -3,7 +3,7 @@ const { Client } = require('pg')
 
 const db = new Pool({
     user: 'postgres',
-    host: 'localhost',
+    host: '172.16.0.2',
     database: 'cmu_flood',
     password: 'Eec-MIS2564db',
     port: 5432,
