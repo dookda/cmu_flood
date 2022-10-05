@@ -1,4 +1,5 @@
-const url = "https://engrids.soc.cmu.ac.th/p3600";
+// const url = "https://engrids.soc.cmu.ac.th/p3600";
+const url = "http://localhost:3600";
 let latlng = {
     lat: 18.784033,
     lng: 99.004762
@@ -71,13 +72,19 @@ let getdata = () => {
         $('#numall').html(d.length)
         // getMap(d)
         getmarker(d)
-
     })
 }
 
+let getDirection = () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(i => {
+            // location.href = 
+            window.open(`https://www.google.com/maps/dir/${i.coords.latitude},${i.coords.longitude}/${i.lat},${i.lng}`, '_blank')
+        });
+    }
+}
+
 let getmarker = (d) => {
-    // console.log(d)
-    // var mm, ms
     map.eachLayer(i => {
         i.options.name == "marker" ? map.removeLayer(i) : null;
     });
@@ -112,35 +119,40 @@ let getmarker = (d) => {
         // console.log(i)
         if (i.geojson) {
             let json = JSON.parse(i.geojson);
-            // json.properties = { bioname: i.bioname, biodetail: i.biodetail, img: i.img };
-            if (i.help == 'ต้องการ') {
-                mm = L.geoJson(json, {
-                    pointToLayer: function (feature, latlng) {
-                        return L.marker(latlng, { name: "marker", icon: MIcon_01 });
-                    }
-                }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6>
-                <h6><b>สถานะ :</b> ${i.status}</h6>
-                <h6><b>การสัญจร :</b> ${i.travel}</h6>
-                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
-                <h6><b>รายละเอียด</b>: ${helptext} </h6> 
-                <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
-                <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
-                // .addTo(map)
-                ms.addLayer(mm);
-            } else if (i.help == 'ไม่ต้องการ') {
-                mm = L.geoJson(json, {
-                    pointToLayer: function (feature, latlng) {
-                        return L.marker(latlng, { name: "marker", icon: MIcon_02 });
-                    }
-                }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6>
-                <h6><b>สถานะ :</b> ${i.status}</h6>
-                <h6><b>การสัญจร :</b> ${i.travel}</h6>
-                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
-                <h6><b>รายละเอียด</b>: ${helptext} </h6> 
-                <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
-                <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
-                // .addTo(map)
-                ms.addLayer(mm);
+            if (i.stat == ">48hr") {
+                if (i.help == 'ต้องการ') {
+                    let mm = L.geoJson(json, {
+                        pointToLayer: function (feature, latlng) {
+                            return L.marker(latlng, { name: "marker", icon: MIcon_01 });
+                        }
+                    }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6>
+                    <h6><b>สถานะ :</b> ${i.status}</h6>
+                    <h6><b>การสัญจร :</b> ${i.travel}</h6>
+                    <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
+                    <h6><b>รายละเอียด</b>: ${helptext} </h6> 
+                    <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
+                    <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">
+                    <hr>
+                    <button class="btn btn-success" onclick="getDirection()">นำทาง</button>`)
+                    // .addTo(map)
+                    ms.addLayer(mm);
+                } else if (i.help == 'ไม่ต้องการ') {
+                    let mm = L.geoJson(json, {
+                        pointToLayer: function (feature, latlng) {
+                            return L.marker(latlng, { name: "marker", icon: MIcon_02 });
+                        }
+                    }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6>
+                    <h6><b>สถานะ :</b> ${i.status}</h6>
+                    <h6><b>การสัญจร :</b> ${i.travel}</h6>
+                    <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
+                    <h6><b>รายละเอียด</b>: ${helptext} </h6> 
+                    <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
+                    <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">
+                    <hr>
+                    <button class="btn btn-success" onclick="getDirection()">นำทาง</button>`)
+                    // .addTo(map)
+                    ms.addLayer(mm);
+                }
             } else {
                 mm = L.geoJson(json, {
                     pointToLayer: function (feature, latlng) {
@@ -152,14 +164,15 @@ let getmarker = (d) => {
                 <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
                 <h6> <b>รายละเอียด</b>: ${helptext} </h6> 
                 <h6> <b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
-                <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
+                <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">
+                <hr>
+                <button class="btn btn-success" onclick="getDirection()">นำทาง</button>`)
                 // .addTo(map)
                 ms.addLayer(mm);
             }
         }
     });
     ms.addTo(map)
-    // lyrControl.addOverlay(ms, "ตำแหน่งหน่วยงานที่รายงาน...")
 }
 
 let getThaiwaterApi = () => {

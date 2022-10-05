@@ -50,7 +50,13 @@ app.post("/api/insertdata", async (req, res) => {
 
 app.get("/api/getdata", (req, res) => {
     const { usrid } = req.body;
-    const sql = `SELECT *, to_char(ts,'DD-MM-YYYY HH24:MM' ) as tstxt , st_asgeojson(geom) as geojson FROM cmu_flood`;
+    const sql = `SELECT *, 
+    to_char(ts,'DD-MM-YYYY HH24:MM' ) as tstxt, 
+    st_asgeojson(geom) as geojson,
+    st_x(geom) as lng,
+    st_y(geom) as lat,
+    case when ts > (now() - interval '12 hours') then '>48hr' else '<48hr' end as stat
+    FROM cmu_flood`;
     db.query(sql).then(r => {
         res.status(200).json({
             data: r.rows
