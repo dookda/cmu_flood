@@ -61,7 +61,7 @@ let d
 let getdata = () => {
     axios.get(url + `/api/getdata`, {}).then(async (r) => {
         d = r.data.data;
-        // console.log(d)
+        console.log(d)
         let numhelp = 0;
         await d.map(i => {
             i.help == "ต้องการ" ? numhelp += 1 : null
@@ -76,19 +76,21 @@ let getdata = () => {
 }
 
 let getmarker = (d) => {
+    // console.log(d)
+    var mm, ms
     map.eachLayer(i => {
         i.options.name == "marker" ? map.removeLayer(i) : null;
     });
 
     var MIcon_01 = L.icon({
         iconUrl: './marker/icon-flood1.png',
-        iconSize: [55, 55],
+        iconSize: [50, 50],
         iconAnchor: [30, 50],
         popupAnchor: [0, -10]
     });
     var MIcon_02 = L.icon({
         iconUrl: './marker/icon-flood2.png',
-        iconSize: [55, 55],
+        iconSize: [50, 50],
         iconAnchor: [30, 50],
         popupAnchor: [0, -10]
     });
@@ -99,6 +101,7 @@ let getmarker = (d) => {
         popupAnchor: [0, -10]
     });
 
+    ms = L.layerGroup()
     d.map(i => {
         let helptext
         if (i.help_text !== null) {
@@ -106,11 +109,12 @@ let getmarker = (d) => {
         } else {
             helptext = "-"
         }
+        // console.log(i)
         if (i.geojson) {
             let json = JSON.parse(i.geojson);
             // json.properties = { bioname: i.bioname, biodetail: i.biodetail, img: i.img };
             if (i.help == 'ต้องการ') {
-                let mm = L.geoJson(json, {
+                mm = L.geoJson(json, {
                     pointToLayer: function (feature, latlng) {
                         return L.marker(latlng, { name: "marker", icon: MIcon_01 });
                     }
@@ -120,7 +124,7 @@ let getmarker = (d) => {
                 // .addTo(map)
                 ms.addLayer(mm);
             } else if (i.help == 'ไม่ต้องการ') {
-                let mm = L.geoJson(json, {
+                mm = L.geoJson(json, {
                     pointToLayer: function (feature, latlng) {
                         return L.marker(latlng, { name: "marker", icon: MIcon_02 });
                     }
@@ -130,7 +134,7 @@ let getmarker = (d) => {
                 // .addTo(map)
                 ms.addLayer(mm);
             } else {
-                let mm = L.geoJson(json, {
+                mm = L.geoJson(json, {
                     pointToLayer: function (feature, latlng) {
                         return L.marker(latlng, { name: "marker", icon: MIcon_03 });
                     }
@@ -142,6 +146,8 @@ let getmarker = (d) => {
             }
         }
     });
+    ms.addTo(map)
+    // lyrControl.addOverlay(ms, "ตำแหน่งหน่วยงานที่รายงาน...")
 }
 
 let getThaiwaterApi = () => {
@@ -366,3 +372,10 @@ function hideLegend() {
 getdata();
 getThaiwaterApi();
 hideLegend();
+
+$("#detail").click(function () {
+    $("#Modaldetail").modal('show')
+
+})
+
+
