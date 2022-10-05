@@ -47,7 +47,7 @@ const baseMaps = {
 
 const overlayMaps = {
     "ตำแหน่งน้ำท่วม": ms.addTo(map),
-    "ขอบเขตระดับพื้นที่เสี่ยงน้ำท่วม": Zoneflood,
+    "ขอบเขตระดับพื้นที่เสี่ยงน้ำท่วม": Zoneflood.addTo(map),
     "ระดับน้ำ": watlev.addTo(map),
     "เรดาห์ฝน": radar.addTo(map)
 };
@@ -77,7 +77,12 @@ let getdata = () => {
 
 let getmarker = (d) => {
     // console.log(d)
+<<<<<<< HEAD
     var mm, ms
+=======
+
+    // var mm, ms
+>>>>>>> b827ab0b1c8afdb750548422592626463f8e3608
     map.eachLayer(i => {
         i.options.name == "marker" ? map.removeLayer(i) : null;
     });
@@ -86,22 +91,26 @@ let getmarker = (d) => {
         iconUrl: './marker/icon-flood1.png',
         iconSize: [50, 50],
         iconAnchor: [30, 50],
-        popupAnchor: [0, -10]
+        popupAnchor: [-5, -40]
     });
     var MIcon_02 = L.icon({
         iconUrl: './marker/icon-flood2.png',
         iconSize: [50, 50],
         iconAnchor: [30, 50],
-        popupAnchor: [0, -10]
+        popupAnchor: [-5, -40]
     });
     var MIcon_03 = L.icon({
         iconUrl: './marker/icon-other.png',
         iconSize: [50, 50],
         iconAnchor: [30, 50],
-        popupAnchor: [0, -10]
+        popupAnchor: [-5, -40]
     });
 
+<<<<<<< HEAD
     ms = L.layerGroup()
+=======
+    // ms = L.layerGroup()
+>>>>>>> b827ab0b1c8afdb750548422592626463f8e3608
     d.map(i => {
         let helptext
         if (i.help_text !== null) {
@@ -118,9 +127,13 @@ let getmarker = (d) => {
                     pointToLayer: function (feature, latlng) {
                         return L.marker(latlng, { name: "marker", icon: MIcon_01 });
                     }
-                })
-                    .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
-                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> <h6> <b>รายละเอียด</b>: ${helptext} <br> </h6> <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
+                }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6>
+                <h6><b>สถานะ :</b> ${i.status}</h6>
+                <h6><b>การสัญจร :</b> ${i.travel}</h6>
+                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
+                <h6><b>รายละเอียด</b>: ${helptext} </h6> 
+                <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
+                <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
                 // .addTo(map)
                 ms.addLayer(mm);
             } else if (i.help == 'ไม่ต้องการ') {
@@ -128,9 +141,13 @@ let getmarker = (d) => {
                     pointToLayer: function (feature, latlng) {
                         return L.marker(latlng, { name: "marker", icon: MIcon_02 });
                     }
-                })
-                    .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
-                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> <h6> <b>รายละเอียด</b>: ${helptext} <br> </h6> <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
+                }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6>
+                <h6><b>สถานะ :</b> ${i.status}</h6>
+                <h6><b>การสัญจร :</b> ${i.travel}</h6>
+                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
+                <h6><b>รายละเอียด</b>: ${helptext} </h6> 
+                <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
+                <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
                 // .addTo(map)
                 ms.addLayer(mm);
             } else {
@@ -138,9 +155,13 @@ let getmarker = (d) => {
                     pointToLayer: function (feature, latlng) {
                         return L.marker(latlng, { name: "marker", icon: MIcon_03 });
                     }
-                })
-                    .bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6><h6><b>สถานะ :</b> ${i.status}</h6><h6><b>การสัญจร :</b> ${i.travel}</h6>
-                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> <h6> <b>รายละเอียด</b>: ${helptext} <br> </h6> <h6> <b>วันที่และเวลา</b>: ${i.tstxt} <br> </h6> <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
+                }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6>
+                <h6><b>สถานะ :</b> ${i.status}</h6>
+                <h6><b>การสัญจร :</b> ${i.travel}</h6>
+                <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
+                <h6> <b>รายละเอียด</b>: ${helptext} </h6> 
+                <h6> <b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
+                <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">`)
                 // .addTo(map)
                 ms.addLayer(mm);
             }
@@ -158,7 +179,7 @@ let getThaiwaterApi = () => {
                 // console.log(i);
                 if (Number(i.storage_percent) <= 10) {
                     let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
-                        radius: 3,
+                        radius: 6,
                         color: '#db802b',
                         fillColor: '#db802b',
                         fillOpacity: 0.9
@@ -170,7 +191,7 @@ let getThaiwaterApi = () => {
                     watlev.addLayer(mk)
                 } else if (Number(i.storage_percent) <= 30) {
                     let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
-                        radius: 3,
+                        radius: 6,
                         color: '#ffc000',
                         fillColor: '#ffc000',
                         fillOpacity: 0.9
@@ -182,7 +203,7 @@ let getThaiwaterApi = () => {
                     watlev.addLayer(mk)
                 } else if (Number(i.storage_percent) <= 70) {
                     let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
-                        radius: 3,
+                        radius: 6,
                         color: '#00b050',
                         fillColor: '#00b050',
                         fillOpacity: 0.9
@@ -194,7 +215,7 @@ let getThaiwaterApi = () => {
                     watlev.addLayer(mk)
                 } else if (Number(i.storage_percent) <= 100) {
                     let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
-                        radius: 3,
+                        radius: 6,
                         color: '#003dfa',
                         fillColor: '#003dfa',
                         fillOpacity: 0.9
@@ -206,7 +227,7 @@ let getThaiwaterApi = () => {
                     watlev.addLayer(mk)
                 } else {
                     let mk = L.circleMarker([i.station.tele_station_lat, i.station.tele_station_long], {
-                        radius: 3,
+                        radius: 6,
                         color: '#ff0000',
                         fillColor: '#ff0000',
                         fillOpacity: 0.9
@@ -376,6 +397,10 @@ hideLegend();
 $("#detail").click(function () {
     $("#Modaldetail").modal('show')
 
+<<<<<<< HEAD
 })
 
 
+=======
+})
+>>>>>>> b827ab0b1c8afdb750548422592626463f8e3608
