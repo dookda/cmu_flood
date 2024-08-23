@@ -1,0 +1,28 @@
+services:
+  postgis:
+    image: postgis/postgis
+    container_name: flood_postgis
+    restart: always
+    environment:
+      - POSTGRES_DB=maindb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+    volumes:
+      - ./postgis/:/docker-entrypoint-initdb.d
+    ports:
+      - 5433:5432
+
+  nodejs:
+    image: node
+    container_name: flood_nodejs
+    working_dir: /app/nodejs
+    restart: always
+    depends_on:
+      - postgis
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./nodejs:/app/nodejs
+    ports:
+      - 80:3000
+    command: bash -c "npm i && npm i -g nodemon && npm i -g pm2 && nodemon server.js"
