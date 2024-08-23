@@ -10,7 +10,7 @@ services:
     volumes:
       - ./postgis/:/docker-entrypoint-initdb.d
     ports:
-      - 5433:5432
+      - 5437:5432
 
   nodejs:
     image: node
