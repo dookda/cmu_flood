@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({
 // const api = require('./service/api');
 // app.use(api);
 
-app.use('/', express.static('www'))
+app.use('/flood', express.static('www'))
 
 const port = 3600;
 app.listen(port, () => {

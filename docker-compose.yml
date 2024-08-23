@@ -4,7 +4,7 @@ services:
     container_name: flood_postgis
     restart: always
     environment:
-      - POSTGRES_DB=maindb
+      - POSTGRES_DB=cmu_flood
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
     volumes:
@@ -24,5 +24,5 @@ services:
     volumes:
       - ./nodejs:/app/nodejs
     ports:
-      - 80:3000
-    command: bash -c "npm i && npm i -g nodemon && npm i -g pm2 && nodemon server.js"
+      - 3600:3600
+    command: bash -c "npm i && npm i -g nodemon && nodemon server.js"
