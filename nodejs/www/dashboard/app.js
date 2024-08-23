@@ -60,7 +60,7 @@ const lyrControl = L.control.layers(baseMaps, overlayMaps, {
 
 let d
 let getdata = () => {
-    axios.get(url + `/api/getdata`, {}).then(async (r) => {
+    axios.get(`/flood/api/getdata`, {}).then(async (r) => {
         d = r.data.data;
         // console.log(d)
         let numhelp = 0;

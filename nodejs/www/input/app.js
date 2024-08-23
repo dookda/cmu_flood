@@ -133,7 +133,7 @@ let postData = async () => {
         }
     }
     console.log(datObj);
-    await axios.post(url + "/api/insertdata", datObj).then(() => {
+    await axios.post("/flood/api/insertdata", datObj).then(() => {
         $('#Modalconfirm').modal('show')
     });
 }

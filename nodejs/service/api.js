@@ -7,7 +7,7 @@ const db = con.db;
 
 
 
-app.post("/api/insertdata", async (req, res) => {
+app.post("/flood/api/insertdata", async (req, res) => {
     console.log(req.body);
     const { data } = req.body;
     let usrid = Date.now()
@@ -48,7 +48,7 @@ app.post("/api/insertdata", async (req, res) => {
 // });
 
 
-app.get("/api/getdata", (req, res) => {
+app.get("/flood/api/getdata", (req, res) => {
     const { usrid } = req.body;
     const sql = `SELECT *, 
     to_char(ts,'DD-MM-YYYY HH24:MM' ) as tstxt, 
