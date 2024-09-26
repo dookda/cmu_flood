@@ -34,7 +34,7 @@ const Zoneflood = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/cm_fl
     iswms: "wms",
     transparent: true,
     maxZoom: 15,
-    opacity: 0.4
+    // opacity: 0.4
     // CQL_FILTER: 'pro_code=20 OR pro_code=21 OR pro_code=24'
 });
 
