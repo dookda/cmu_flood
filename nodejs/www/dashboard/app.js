@@ -28,7 +28,7 @@ const ghyb = L.tileLayer("https://{s}.google.com/vt/lyrs=y,m&x={x}&y={y}&z={z}",
 });
 
 const Zoneflood = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/cm_flood/wms?", {
-    layers: "cm_flood:7_zoneall_utm",
+    layers: "cm_flood:zone_floodcm_65",
     format: "image/png",
     name: "lyr",
     iswms: "wms",
