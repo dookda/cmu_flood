@@ -123,6 +123,7 @@ CREATE TABLE public.cmu_flood (
     usrid text,
     pname text,
     status text,
+    wlevel numeric,
     travel text,
     help text,
     help_text text,

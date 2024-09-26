@@ -118,6 +118,7 @@ let resizeImage = (file) => {
 let postData = async () => {
     let pname = document.getElementById("pname").value
     let status = document.querySelector('input[name="status"]:checked').value;
+    let wlevel = document.getElementById("wlevel").value
     let travel = document.querySelector('input[name="travel"]:checked').value;
     let help = document.querySelector('input[name="help"]:checked').value;
     let help_text = document.getElementById("help_text").value
@@ -125,6 +126,7 @@ let postData = async () => {
         data: {
             pname,
             status,
+            wlevel,
             travel,
             help,
             help_text,
