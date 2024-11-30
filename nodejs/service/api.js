@@ -99,4 +99,26 @@ app.delete("/api/delete-row/:gid", async (req, res) => {
     }
 });
 
+app.put("/api/update-row/:gid", async (req, res) => {
+    const gid = req.params.gid;
+    const { usrid, pname, status, wlevel, travel, help, help_text } = req.body;
+
+    try {
+        const result = await db.query(
+            `UPDATE public.cmu_flood 
+            SET usrid = $1, pname = $2, status = $3, wlevel = $4, travel = $5, help = $6, help_text = $7 
+            WHERE gid = $8`,
+            [usrid, pname, status, wlevel, travel, help, help_text, gid]
+        );
+        if (result.rowCount > 0) {
+            res.status(200).send("Row updated successfully");
+        } else {
+            res.status(404).send("Row not found");
+        }
+    } catch (error) {
+        console.error("Error updating row:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 module.exports = app;

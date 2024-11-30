@@ -188,6 +188,57 @@
             </div>
         </div>
     </footer><!-- End Footer -->
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="editForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit Row</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="editGid">
+                        <div class="mb-3">
+                            <label for="editUsrid" class="form-label">User ID</label>
+                            <input type="text" class="form-control" id="editUsrid" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editPname" class="form-label">สถานที่</label>
+                            <input type="text" class="form-control" id="editPname" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editStatus" class="form-label">สถานะ</label>
+                            <input type="text" class="form-control" id="editStatus" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editWlevel" class="form-label">ระดับน้ำ</label>
+                            <input type="number" class="form-control" id="editWlevel" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editTravel" class="form-label">การสัญจร</label>
+                            <input type="text" class="form-control" id="editTravel">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editHelp" class="form-label">ต้องการความช่วยเหลือ</label>
+                            <input type="text" class="form-control" id="editHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editHelpText" class="form-label">ขอความช่วยเหลืออย่างไร</label>
+                            <textarea class="form-control" id="editHelpText"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                        <button type="submit" class="btn btn-primary">บันทึก</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
     <div class="modal" id="Modaldetail">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="w3-animate-top"></div>
@@ -202,7 +253,7 @@
                 <!-- Modal body -->
                 <div class="modal-body text-center">
                     <br>
-                    <p>
+                    <!-- <p>
                         เทศบาลนครเชียงใหม่ จัดตั้ง
                         ศูนย์ประสานงานและให้ความช่วยเหลือผู้ประสบภัยน้ำท่วม ณ สำนักงานแขวงกาวิละ
                         ตั้งอยู่ที่ 515 ถ.เชียงใหม่-ลำพูน ต.วัดเกต อ.เมืองเชียงใหม่ จ.เชียงใหม่
@@ -222,7 +273,7 @@
                         <b>**กรณีต้องการความช่วยเหลือฉุกเฉินสำหรับผู้ป่วย “ในพื้นที่น้ำท่วมสูงที่รถเข้าไม่ได้”</b>
                         ติดต่อ 053-259199
                         ตลอด 24 ชั่วโมง
-                    </P>
+                    </P> -->
                 </div>
 
                 <!-- Modal footer -->

@@ -84,7 +84,10 @@ $(document).ready(function () {
                         render: function (data) {
                             return `
                                 <button class="btn btn-danger btn-sm delete-row" data-id="${data.gid}">
-                                    Delete
+                                    ลบ
+                                </button>
+                                <button class="btn btn-warning btn-sm edit-row" data-id="${data.gid}">
+                                    แก้ไข
                                 </button>
                             `;
                         },
@@ -138,7 +141,6 @@ $(document).ready(function () {
             });
 
             table.on("draw", function () {
-                const data = table.rows({ search: "applied" }).data().toArray();
                 getmarker(table.rows({ search: "applied" }).data().toArray());
             });
 
@@ -147,7 +149,6 @@ $(document).ready(function () {
                 const rowData = row.data();
                 const gid = rowData.gid;
 
-                // Confirm deletion
                 if (confirm(`Are you sure you want to delete row with GID: ${gid}?`)) {
                     $.ajax({
                         url: `/flood/api/delete-row/${gid}`,
@@ -162,6 +163,56 @@ $(document).ready(function () {
                         },
                     });
                 }
+            });
+            $("#floodTable").on("click", ".edit-row", function () {
+                const row = table.row($(this).parents("tr"));
+                const rowData = row.data();
+
+                // Populate modal fields with row data
+                $("#editModal").find("#editGid").val(rowData.gid);
+                $("#editModal").find("#editUsrid").val(rowData.usrid);
+                $("#editModal").find("#editPname").val(rowData.pname);
+                $("#editModal").find("#editStatus").val(rowData.status);
+                $("#editModal").find("#editWlevel").val(rowData.wlevel);
+                $("#editModal").find("#editTravel").val(rowData.travel);
+                $("#editModal").find("#editHelp").val(rowData.help);
+                $("#editModal").find("#editHelpText").val(rowData.help_text);
+
+                // Show the modal
+                $("#editModal").modal("show");
+
+                // Handle form submission
+                $("#editForm").off("submit").on("submit", function (e) {
+                    e.preventDefault();
+
+                    const updatedData = {
+                        gid: rowData.gid,
+                        usrid: $("#editUsrid").val(),
+                        pname: $("#editPname").val(),
+                        status: $("#editStatus").val(),
+                        wlevel: $("#editWlevel").val(),
+                        travel: $("#editTravel").val(),
+                        help: $("#editHelp").val(),
+                        help_text: $("#editHelpText").val(),
+                    };
+
+                    // Send the updated data to the backend
+                    $.ajax({
+                        url: `/flood/api/update-row/${updatedData.gid}`,
+                        type: "PUT",
+                        contentType: "application/json",
+                        data: JSON.stringify(updatedData),
+                        success: function () {
+                            // Update the row in the DataTable
+                            row.data(updatedData).draw();
+                            alert("แก้ไขสำเร็จ!");
+                            $("#editModal").modal("hide");
+                        },
+                        error: function () {
+                            alert("Failed to update the row.");
+                        },
+                    });
+                });
             });
         }
     });
@@ -194,79 +245,89 @@ let getDirection = (lat, lng) => {
 }
 
 let getmarker = (data) => {
-    map.eachLayer(i => {
-        i.options.name == "marker" ? map.removeLayer(i) : null;
-    });
+    try {
+        map.eachLayer(i => {
+            i.options.name == "marker" ? map.removeLayer(i) : null;
+        });
 
-    var MIcon_01 = L.icon({
-        iconUrl: './marker/icon-flood1.png',
-        iconSize: [50, 50],
-        iconAnchor: [30, 50],
-        popupAnchor: [-5, -40]
-    });
-    var MIcon_02 = L.icon({
-        iconUrl: './marker/icon-flood2.png',
-        iconSize: [50, 50],
-        iconAnchor: [30, 50],
-        popupAnchor: [-5, -40]
-    });
-    var MIcon_03 = L.icon({
-        iconUrl: './marker/icon-flood3.png',
-        iconSize: [50, 50],
-        iconAnchor: [30, 50],
-        popupAnchor: [-5, -40]
-    });
+        var MIcon_01 = L.icon({
+            iconUrl: './marker/icon-flood1.png',
+            iconSize: [50, 50],
+            iconAnchor: [30, 50],
+            popupAnchor: [-5, -40]
+        });
+        var MIcon_02 = L.icon({
+            iconUrl: './marker/icon-flood2.png',
+            iconSize: [50, 50],
+            iconAnchor: [30, 50],
+            popupAnchor: [-5, -40]
+        });
+        var MIcon_03 = L.icon({
+            iconUrl: './marker/icon-flood3.png',
+            iconSize: [50, 50],
+            iconAnchor: [30, 50],
+            popupAnchor: [-5, -40]
+        });
 
-    data.map(i => {
-        let helptext
-        if (i.help_text !== null) {
-            helptext = i.help_text
-        } else {
-            helptext = "-"
-        }
-        // console.log(i)
-        if (i.geojson) {
-            let json = JSON.parse(i.geojson);
-            if (i.stat == ">48hr") {
-                if (i.help == 'ต้องการ') {
-                    let mm = L.geoJson(json, {
-                        pointToLayer: function (feature, latlng) {
-                            return L.marker(latlng, { name: "marker", icon: MIcon_01 });
-                        }
-                    }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6>
-                    <h6><b>สถานะ :</b> ${i.status}</h6>
-                    <h6><b>การสัญจร :</b> ${i.travel}</h6>
-                    <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
-                    <h6><b>รายละเอียด</b>: ${helptext} </h6> 
-                    <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
-                    <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">
-                    <hr>
-                    <button class="btn btn-success kanit" onclick="getDirection(${i.lat},${i.lng})">นำทาง</button>`)
-                    // .addTo(map)
-                    ms.addLayer(mm);
-                } else if (i.help == 'ไม่ต้องการ') {
-                    let mm = L.geoJson(json, {
-                        pointToLayer: function (feature, latlng) {
-                            return L.marker(latlng, { name: "marker", icon: MIcon_02 });
-                        }
-                    }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6>
-                    <h6><b>สถานะ :</b> ${i.status}</h6>
-                    <h6><b>การสัญจร :</b> ${i.travel}</h6>
-                    <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
-                    <h6><b>รายละเอียด</b>: ${helptext} </h6> 
-                    <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
-                    <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">
-                    <hr>
-                    <button class="btn btn-success kanit" onclick="getDirection(${i.lat},${i.lng})">นำทาง</button>`)
-                    // .addTo(map)
-                    ms.addLayer(mm);
-                }
+
+        let numhelp = 0;
+        data.map(i => {
+            i.help == "ต้องการ" ? numhelp += 1 : null
+        })
+
+        $("#numhelp").text(numhelp)
+        $('#numall').html(data.length)
+
+        data.map(i => {
+            let helptext
+            if (i.help_text !== null) {
+                helptext = i.help_text
             } else {
-                mm = L.geoJson(json, {
-                    pointToLayer: function (feature, latlng) {
-                        return L.marker(latlng, { name: "marker", icon: MIcon_03 });
+                helptext = "-"
+            }
+            // console.log(i)
+            if (i.geojson) {
+                let json = JSON.parse(i.geojson);
+                if (i.stat == ">48hr") {
+                    if (i.help == 'ต้องการ') {
+                        let mm = L.geoJson(json, {
+                            pointToLayer: function (feature, latlng) {
+                                return L.marker(latlng, { name: "marker", icon: MIcon_01 });
+                            }
+                        }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6>
+                    <h6><b>สถานะ :</b> ${i.status}</h6>
+                    <h6><b>การสัญจร :</b> ${i.travel}</h6>
+                    <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
+                    <h6><b>รายละเอียด</b>: ${helptext} </h6> 
+                    <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
+                    <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">
+                    <hr>
+                    <button class="btn btn-success kanit" onclick="getDirection(${i.lat},${i.lng})">นำทาง</button>`)
+                        // .addTo(map)
+                        ms.addLayer(mm);
+                    } else if (i.help == 'ไม่ต้องการ') {
+                        let mm = L.geoJson(json, {
+                            pointToLayer: function (feature, latlng) {
+                                return L.marker(latlng, { name: "marker", icon: MIcon_02 });
+                            }
+                        }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6>
+                    <h6><b>สถานะ :</b> ${i.status}</h6>
+                    <h6><b>การสัญจร :</b> ${i.travel}</h6>
+                    <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
+                    <h6><b>รายละเอียด</b>: ${helptext} </h6> 
+                    <h6><b>วันที่และเวลา</b>: ${i.tstxt} น.</h6> 
+                    <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">
+                    <hr>
+                    <button class="btn btn-success kanit" onclick="getDirection(${i.lat},${i.lng})">นำทาง</button>`)
+                        // .addTo(map)
+                        ms.addLayer(mm);
                     }
-                }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6>
+                } else {
+                    mm = L.geoJson(json, {
+                        pointToLayer: function (feature, latlng) {
+                            return L.marker(latlng, { name: "marker", icon: MIcon_03 });
+                        }
+                    }).bindPopup(`<h6><b>สถานที่ที่ได้รับผลกระทบ :</b> ${i.pname}</h6>
                 <h6><b>สถานะ :</b> ${i.status}</h6>
                 <h6><b>การสัญจร :</b> ${i.travel}</h6>
                 <h6><b>ความช่วยเหลือ :</b> ${i.help} </h6> 
@@ -275,12 +336,16 @@ let getmarker = (data) => {
                 <img src="${i.img !== null && i.img !== "" ? i.img : './marker/noimg.png'}"style="width:100%">
                 <hr>
                 <button class="btn btn-success kanit" onclick="getDirection(${i.lat},${i.lng})">นำทาง</button>`)
-                // .addTo(map)
-                ms.addLayer(mm);
+                    // .addTo(map)
+                    ms.addLayer(mm);
+                }
             }
-        }
-    });
-    ms.addTo(map)
+        });
+        ms.addTo(map)
+    } catch (error) {
+        console.error("An error occurred in getmarker:", error);
+        alert("An error occurred while loading markers. Please try again later.");
+    }
 }
 
 let getThaiwaterApi = () => {
