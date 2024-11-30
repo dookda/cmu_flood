@@ -4,7 +4,7 @@ services:
     container_name: flood_postgis
     restart: always
     environment:
-      # - POSTGRES_DB=cmu_flood
+      - POSTGRES_DB=cmu_flood
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
     volumes:

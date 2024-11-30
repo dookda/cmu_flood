@@ -33,11 +33,10 @@ app.use(bodyParser.urlencoded({
 // app.use(api);
 
 app.use('/flood', express.static('www'))
+app.use('/flood', require('./service/api'));
 
 const port = 3600;
 app.listen(port, () => {
     console.log(`http://localhost:${port}`);
 })
 
-const api = require('./service/api');
-app.use(api);

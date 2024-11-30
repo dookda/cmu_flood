@@ -69,22 +69,120 @@ const lyrControl = L.control.layers(baseMaps, overlayMaps, {
 }).addTo(map);
 
 
-let d
-let getdata = () => {
-    axios.get(`/flood/api/getdata`, {}).then(async (r) => {
-        d = r.data.data;
-        // console.log(d)
-        let numhelp = 0;
-        await d.map(i => {
-            i.help == "ต้องการ" ? numhelp += 1 : null
-        })
+$(document).ready(function () {
+    $.ajax({
+        url: '/flood/api/flood-data',
+        method: 'GET',
+        success: function (data) {
+            // DataTable initialization
+            const table = $('#floodTable').DataTable({
+                data: data,
+                columns: [
+                    {
+                        // Add a delete button
+                        data: null,
+                        render: function (data) {
+                            return `
+                                <button class="btn btn-danger btn-sm delete-row" data-id="${data.gid}">
+                                    Delete
+                                </button>
+                            `;
+                        },
+                        orderable: false,
+                        searchable: false,
+                    },
+                    // { data: 'usrid' },
+                    { data: 'pname' },
+                    { data: 'status' },
+                    { data: 'wlevel' },
+                    { data: "travel" },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            // Concatenate the values
+                            const help = data.help || "";
+                            const helpText = data.help_text || "";
+                            return `${help} ${helpText == "" ? "" : "(" + helpText + ")"}`;
+                        },
+                    }, {
+                        data: "ts",
+                        render: function (data) {
+                            if (!data) return "N/A";
+                            const date = new Date(data);
 
-        $("#numhelp").text(numhelp)
-        $('#numall').html(d.length)
-        // getMap(d)
-        getmarker(d)
-    })
-}
+                            // Format as "วัน DD เดือน YYYY เวลา HH:MM น."
+                            return new Intl.DateTimeFormat("th-TH", {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                            }).format(date) + " น.";
+                        },
+                    }
+                ],
+                scrollX: true,
+                dom: "Bfrtip",
+                buttons: [
+                    {
+                        extend: "excelHtml5",
+                        title: "Flood Data",
+                        exportOptions: {
+                            columns: ":visible",
+                        },
+                    },
+                ],
+                initComplete: function () {
+                    getmarker(this.api().data().toArray());
+                },
+            });
+
+            table.on("draw", function () {
+                const data = table.rows({ search: "applied" }).data().toArray();
+                getmarker(table.rows({ search: "applied" }).data().toArray());
+            });
+
+            $("#floodTable").on("click", ".delete-row", function () {
+                const row = table.row($(this).parents("tr")); // Get the row
+                const rowData = row.data();
+                const gid = rowData.gid;
+
+                // Confirm deletion
+                if (confirm(`Are you sure you want to delete row with GID: ${gid}?`)) {
+                    $.ajax({
+                        url: `/flood/api/delete-row/${gid}`,
+                        type: "DELETE",
+                        success: function () {
+                            // Remove the row from DataTable
+                            row.remove().draw();
+                            alert("Row deleted successfully!");
+                        },
+                        error: function () {
+                            alert("Failed to delete the row.");
+                        },
+                    });
+                }
+            });
+        }
+    });
+});
+
+// let d
+// let getdata = () => {
+//     axios.get(`/flood/api/getdata`, {}).then(async (r) => {
+//         d = r.data.data;
+//         // console.log(d)
+//         let numhelp = 0;
+//         await d.map(i => {
+//             i.help == "ต้องการ" ? numhelp += 1 : null
+//         })
+
+//         $("#numhelp").text(numhelp)
+//         $('#numall').html(d.length)
+//         // getMap(d)
+//         getmarker(d)
+//     })
+// }
 
 let getDirection = (lat, lng) => {
     if (navigator.geolocation) {
@@ -95,7 +193,7 @@ let getDirection = (lat, lng) => {
     }
 }
 
-let getmarker = (d) => {
+let getmarker = (data) => {
     map.eachLayer(i => {
         i.options.name == "marker" ? map.removeLayer(i) : null;
     });
@@ -119,8 +217,7 @@ let getmarker = (d) => {
         popupAnchor: [-5, -40]
     });
 
-    // ms = L.layerGroup()
-    d.map(i => {
+    data.map(i => {
         let helptext
         if (i.help_text !== null) {
             helptext = i.help_text
@@ -421,7 +518,7 @@ function hideLegend() {
     legend.addTo(map);
 }
 // showLegend()
-getdata();
+// getdata();
 getThaiwaterApi();
 hideLegend();
 
