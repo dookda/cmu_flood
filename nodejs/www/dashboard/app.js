@@ -1,12 +1,12 @@
 const url = "https://engrids.soc.cmu.ac.th/p3600";
 // const url = "http://localhost:3600";
 let latlng = {
-    lat: 18.784033,
-    lng: 99.004762
+    lat: 6.493,
+    lng: 101.004762
 };
 let map = L.map("map", {
     center: latlng,
-    zoom: 14
+    zoom: 9
 });
 const mapbox = L.tileLayer(
     "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZG9va2RhIiwiYSI6ImNtMWltMmg2YjBuZHAyaXNiYmhveXp5NGUifQ.16lCYAH_WidkhLA6lNEmZQ",
@@ -27,7 +27,7 @@ const ghyb = L.tileLayer("https://{s}.google.com/vt/lyrs=y,m&x={x}&y={y}&z={z}",
     subdomains: ["mt0", "mt1", "mt2", "mt3"]
 });
 
-const Zoneflood = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/cm_flood/wms?", {
+const Zoneflood1 = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/cm_flood/wms?", {
     layers: "cm_flood:zone_floodcm_65",
     format: "image/png",
     name: "lyr",
@@ -36,6 +36,17 @@ const Zoneflood = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/cm_fl
     maxZoom: 15,
     opacity: 0.5
     // CQL_FILTER: 'pro_code=20 OR pro_code=21 OR pro_code=24'
+});
+
+const Zoneflood = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/eac/wms?", {
+    layers: "eac:province_4326",
+    format: "image/png",
+    name: "lyr",
+    iswms: "wms",
+    transparent: true,
+    maxZoom: 15,
+    opacity: 0.5,
+    CQL_FILTER: 'pro_code=90 OR pro_code=94 OR pro_code=95'
 });
 
 var radar = L.layerGroup()
