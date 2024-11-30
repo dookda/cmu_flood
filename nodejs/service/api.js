@@ -57,7 +57,7 @@ app.get("/flood/api/getdata", (req, res) => {
     st_y(geom) as lat,
     case when ts > (now() - interval '48 hours') then '>48hr' else '<48hr' end as stat
     FROM cmu_flood
-    WHERE ts >= '2023-01-01'`;
+    WHERE ts >= '2024-11-01'`;
     db.query(sql).then(r => {
         res.status(200).json({
             data: r.rows
