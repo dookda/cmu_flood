@@ -4,9 +4,15 @@ let latlng = {
     lat: 6.493,
     lng: 101.004762
 };
+
+let cmLatlng = {
+    lat: 18.78,
+    lng: 98.98
+};
+
 let map = L.map("map", {
-    center: latlng,
-    zoom: 9
+    center: cmLatlng,
+    zoom: 12
 });
 const mapbox = L.tileLayer(
     "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZG9va2RhIiwiYSI6ImNtMWltMmg2YjBuZHAyaXNiYmhveXp5NGUifQ.16lCYAH_WidkhLA6lNEmZQ",
