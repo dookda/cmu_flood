@@ -33,7 +33,12 @@ const ghyb = L.tileLayer("https://{s}.google.com/vt/lyrs=y,m&x={x}&y={y}&z={z}",
     subdomains: ["mt0", "mt1", "mt2", "mt3"]
 });
 
-const Zoneflood1 = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/cm_flood/wms?", {
+const gsat = L.tileLayer("https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", {
+    maxZoom: 20,
+    subdomains: ["mt0", "mt1", "mt2", "mt3"]
+});
+
+const Zoneflood = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/cm_flood/wms?", {
     layers: "cm_flood:zone_floodcm_65",
     format: "image/png",
     name: "lyr",
@@ -44,7 +49,7 @@ const Zoneflood1 = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/cm_f
     // CQL_FILTER: 'pro_code=20 OR pro_code=21 OR pro_code=24'
 });
 
-const Zoneflood = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/eac/wms?", {
+const ZonefloodSouth = L.tileLayer.wms("https://engrids.soc.cmu.ac.th/geoserver/eac/wms?", {
     layers: "eac:province_4326",
     format: "image/png",
     name: "lyr",
@@ -59,8 +64,9 @@ var radar = L.layerGroup()
 var ms = L.layerGroup()
 var watlev = L.layerGroup()
 const baseMaps = {
-    "Mapbox": mapbox.addTo(map),
-    "Google Hybrid": ghyb
+    "Mapbox": mapbox,
+    "Google Hybrid": ghyb,
+    "แผนที่จากดาวเทียม": gsat.addTo(map)
 };
 
 const overlayMaps = {
